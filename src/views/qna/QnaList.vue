@@ -10,11 +10,16 @@
               <option value="qnano" selected="selected">글번호</option>
               <option value="subject">제목</option>
               <option value="content">내용</option>
-              <option value="answer" >답변</option>
+              <option value="answer">답변</option>
             </select>
           </td>
           <td class="p-0">
-            <input type="text" class="form-control" placeholder="검색어 입력." v-model="searchText"/>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="검색어 입력."
+              v-model="searchText"
+            />
           </td>
           <td class="p-0">
             <button class="btn btn-primary" @click.prevent="searchQnaByOption">검색</button>
@@ -24,7 +29,7 @@
       </table>
 
       <!-- 작성한 글이 없을경우 출력 -->
-      <table v-if="qnaData.list === 'null'" class="table table-active">
+      <table v-if="pageArray === 'null'" class="table table-active">
         <tbody>
           <tr class="table-info" align="center">
             <td>작성된 글이 없습니다.</td>
@@ -33,10 +38,15 @@
       </table>
 
       <!-- 작성한 글이 있을경우 목록출력 -->
-      <table v-if="qnaData.list !== 'null'" class="table table-active">
+      <!-- <table v-if="qnaData.list !== 'null'" class="table table-active">
         <qna-list-item v-for="(qna, index) in qnaData.list" :key="index" :qna="qna">
         </qna-list-item>
+      </table> -->
+
+      <table v-if="pageArray !== 'null'" class="table table-active">
+        <qna-paginated-list :list-array="pageArray" />
       </table>
+
       <!-- <table align="center">
         <tr>
           <td>${navigation.navigator}</td>
@@ -47,59 +57,76 @@
 </template>
 
 <script>
-import axios from 'axios';
-import QnaListItem from '@/components/qna/QnaListItem.vue';
-import { mapActions, mapMutations } from 'vuex';
+import axios from "axios";
+import QnaPaginatedList from "@/components/qna/QnaPaginatedList.vue";
+import { mapActions, mapMutations } from "vuex";
 export default {
-  components: { QnaListItem },
+  components: { QnaPaginatedList },
 
   data() {
     return {
-      option: 'qnano',
-      searchText: '',
+      option: "qnano",
+      searchText: "",
+      pageArray: [],
     };
   },
 
   methods: {
     ...mapActions({
       getQnaList: "getQnaList",
-			searchQnaList: "searchQnaList",
+      searchQnaList: "searchQnaList",
+      // getQnaPaginatedList: "getQnaPaginatedList",
     }),
 
     ...mapMutations({
       GET_QNA_LIST: "GET_QNA_LIST",
+      // GET_QNA_PAGINATED_LIST: "GET_QNA_PAGINATED_LIST",
     }),
 
     searchQnaByOption() {
-			// console.log(this.selectGugun + "|" + this.selectDong);
-			this.searchQnaList({ key: this.option, word: this.searchText });
-		},
+      // console.log(this.selectGugun + "|" + this.selectDong);
+      this.searchQnaList({ key: this.option, word: this.searchText });
+    },
 
     searchQna() {
-			// console.log(this.selectGugun + "|" + this.selectDong);
-			this.getQnaList();
-		},
+      // console.log(this.selectGugun + "|" + this.selectDong);
+      this.getQnaList();
+    },
   },
 
-  computed: {
-    qnaData() {
-      return this.$store.state.qnas;
-    }
-  },
+  // computed: {
+  //   qnaData() {
+  //     return this.$store.state.qnas;
+  //   },
+  // },
+
+  // created() {
+  //   const addr = "http://localhost/qna/list";
+
+  //   axios
+  //     .get(addr)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       this.GET_QNA_LIST(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.dir(error);
+  //     });
+  // },
 
   created() {
-      const addr = 'http://localhost/qna/list';
+    const addr = "http://localhost/qna/list";
 
-      axios
+    axios
       .get(addr)
       .then((response) => {
-          console.log(response.data);
-          this.GET_QNA_LIST(response.data);
+        console.log(response.data);
+        this.pageArray = response.data.list;
       })
       .catch((error) => {
-          console.dir(error);
+        console.dir(error);
       });
-  }
+  },
 };
 </script>
 

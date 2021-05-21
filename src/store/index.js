@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from 'axios';
-import createPersistedState from 'vuex-persistedstate';
+import axios from "axios";
+import createPersistedState from "vuex-persistedstate";
 
 import happyHouse from "@/js/http-happy-house";
 
@@ -15,7 +15,7 @@ export default new Vuex.Store({
     dong: [],
 
     qnas: [],
-
+    qna: [],
   },
 
   getters: {
@@ -25,6 +25,10 @@ export default new Vuex.Store({
 
     qnaData(state) {
       return state.qnas;
+    },
+
+    qna(state) {
+      return state.qna;
     },
   },
 
@@ -60,15 +64,20 @@ export default new Vuex.Store({
       state.qnas = qnas;
     },
 
+    GET_QNA(state, qna) {
+      state.qna = qna;
+    },
+
     SEARCH_QNA_LIST(state, qnas) {
       // console.log(qnas);
       state.qnas = qnas;
-    }
+    },
   },
 
   actions: {
     getAptList({ commit }, data) {
-      const SERVICE_URL ='http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev';
+      const SERVICE_URL =
+        "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
 
       const params = {
@@ -85,9 +94,9 @@ export default new Vuex.Store({
         .then((response) => {
           // console.log(response.data);
           if (response.data.response.body.items === "") {
-            commit('GET_APT_LIST', []);
+            commit("GET_APT_LIST", []);
           } else {
-            commit('GET_APT_LIST', response.data.response.body.items.item);
+            commit("GET_APT_LIST", response.data.response.body.items.item);
           }
         })
         .catch((error) => {
@@ -96,7 +105,7 @@ export default new Vuex.Store({
     },
 
     getSidoList({ commit }, data) {
-      commit('GET_SIDO_LIST', data);
+      commit("GET_SIDO_LIST", data);
       // const addr = 'http://localhost/map/sido';
 
       // axios
@@ -111,135 +120,147 @@ export default new Vuex.Store({
     },
 
     getGugunList({ commit }, code) {
-      const addr = 'http://localhost/map/gugun/';
+      const addr = "http://localhost/map/gugun/";
 
       axios
         .get(addr + code)
         .then((response) => {
-            // console.log(response.data);
-            commit('GET_GUGUN_LIST', response.data);
+          // console.log(response.data);
+          commit("GET_GUGUN_LIST", response.data);
         })
         .catch((error) => {
-            console.dir(error);
+          console.dir(error);
         });
     },
 
     getDongList({ commit }, code) {
-      const addr = 'http://localhost/map/dong/';
+      const addr = "http://localhost/map/dong/";
 
       axios
         .get(addr + code)
         .then((response) => {
-            // console.log(response.data);
-            commit('GET_DONG_LIST', response.data);
+          // console.log(response.data);
+          commit("GET_DONG_LIST", response.data);
         })
         .catch((error) => {
-            console.dir(error);
+          console.dir(error);
         });
     },
 
     getAptListByDong({ commit }, text) {
-      const addr = 'http://localhost/search/dong/';
+      const addr = "http://localhost/search/dong/";
 
       axios
-      .get(addr + text)
-      .then((response) => {
+        .get(addr + text)
+        .then((response) => {
           // console.log(response.data);
-          commit('GET_APT_LIST_BY_DONG', response.data);
-      })
-      .catch((error) => {
+          commit("GET_APT_LIST_BY_DONG", response.data);
+        })
+        .catch((error) => {
           console.dir(error);
-      });
+        });
     },
 
     getAptListByAptName({ commit }, text) {
-      const addr = 'http://localhost/search/aptname/';
+      const addr = "http://localhost/search/aptname/";
 
       axios
-      .get(addr + text)
-      .then((response) => {
+        .get(addr + text)
+        .then((response) => {
           // console.log(response.data);
-          commit('GET_APT_LIST_BY_APT_NAME', response.data);
-      })
-      .catch((error) => {
+          commit("GET_APT_LIST_BY_APT_NAME", response.data);
+        })
+        .catch((error) => {
           console.dir(error);
-      });
+        });
     },
 
     getQnaList({ commit }) {
-      const addr = 'http://localhost/qna/list';
+      const addr = "http://localhost/qna/list";
 
       axios
-      .get(addr)
-      .then((response) => {
+        .get(addr)
+        .then((response) => {
           console.log(response.data);
-          commit('GET_QNA_LIST', response.data);
-      })
-      .catch((error) => {
+          commit("GET_QNA_LIST", response.data);
+        })
+        .catch((error) => {
           console.dir(error);
-      });
+        });
+    },
+
+    getQna({ commit }, payload) {
+      axios
+        .get(payload)
+        .then((response) => {
+          console.log(response.data);
+          commit("GET_QNA", response.data);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
     },
 
     searchQnaList({ commit }, option) {
       console.log(option.key + "|" + option.word);
-      const addr = 'http://localhost/qna/search';
+      const addr = "http://localhost/qna/search";
 
       axios
-      .get(addr, {
-        params: {
-          key: option.key,
-          word: option.word
-        }
-      })
-      .then((response) => {
+        .get(addr, {
+          params: {
+            key: option.key,
+            word: option.word,
+          },
+        })
+        .then((response) => {
           console.log(response.data);
-          commit('SEARCH_QNA_LIST', response.data);
-      })
-      .catch((error) => {
+          commit("SEARCH_QNA_LIST", response.data);
+        })
+        .catch((error) => {
           console.dir(error);
-      });
+        });
     },
 
     registerQna(context, data) {
       console.log(data);
-      const addr = 'http://localhost/qna/register';
+      const addr = "http://localhost/qna/register";
 
       axios
-      .post(addr, data)
-      .then((response) => {
+        .post(addr, data)
+        .then((response) => {
           console.log(response);
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.dir(error);
-      });
+        });
     },
 
     modifyQna(context, data) {
       console.log(data);
-      const addr = 'http://localhost/qna/';
+      const addr = "http://localhost/qna/";
 
       axios
-      .put(addr + data.qnAno, data)
-      .then((response) => {
+        .put(addr + data.qnAno, data)
+        .then((response) => {
           console.log(response);
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.dir(error);
-      });
+        });
     },
 
     deleteQna(context, no) {
       console.log(no);
-      const addr = 'http://localhost/qna/';
+      const addr = "http://localhost/qna/";
 
       axios
-      .delete(addr + no)
-      .then((response) => {
+        .delete(addr + no)
+        .then((response) => {
           console.log(response);
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.dir(error);
-      });
+        });
     },
   },
   modules: {},

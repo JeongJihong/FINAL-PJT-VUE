@@ -91,6 +91,11 @@ const routes = [
         name: "qnamodify",
         component: QnaModify,
       },
+      {
+        path: "view/:no",
+        name: "qnaview",
+        component: () => import("@/components/qna/QnaListItem.vue"),
+      },
     ],
   },
 ];
