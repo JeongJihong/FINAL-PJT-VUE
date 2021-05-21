@@ -30,7 +30,7 @@ export default new Vuex.Store({
 
   mutations: {
     GET_APT_LIST(state, apts) {
-      console.log(state, apts);
+      // console.log(state, apts);
       state.apts = apts;
     },
 

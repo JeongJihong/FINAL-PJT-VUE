@@ -71,6 +71,7 @@ export default {
 			} else {
 				date = [this.selectYear, this.selectMonth].join("")
 			}
+			
 			this.getAptList({ "dong": this.selectDong, "date": date });
 			if(this.$route.path !== "/search") this.$router.replace("/search");
 		},
