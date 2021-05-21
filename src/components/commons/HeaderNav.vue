@@ -52,7 +52,7 @@
                     <div class="nav-item">
                         <div class="form-inline">
                             <input type='text' v-model="searchText" class="form-control mr-sm-2" placeholder="아파트 이름">
-                            <input class="btn btn-outline-secondary my-2 my-sm-0" @click.prevent="searchByAptName" value='Search'>
+                            <router-link to="search" class="btn btn-outline-secondary my-2 my-sm-0">Search</router-link>
                         </div>
                     </div>
                 </div>
@@ -85,11 +85,6 @@ export default {
             getAptListByAptName: "getAptListByAptName",
             getQnaList: "getQnaList",
         }),
-
-        searchByAptName() {
-            this.getAptListByAptName(this.searchText);
-            if(this.$route.path !== "/search") this.$router.replace("/search");
-        },
 
         searchQna() {
             if(this.$route.path !== "/qna/list") this.$router.replace("/qna/list");
