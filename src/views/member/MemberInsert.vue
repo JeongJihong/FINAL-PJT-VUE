@@ -6,7 +6,7 @@
       <div class="row mb-2">
         <!-- AD -->
         <article class="col-sm-4">
-          <img src="../assets/img/sideAD.jpg" class="img-thumbnail" alt="ad" />
+          <img src="@/assets/img/sideAD.jpg" class="img-thumbnail" alt="ad" />
         </article>
 
         <!-- 회원 가입 -->

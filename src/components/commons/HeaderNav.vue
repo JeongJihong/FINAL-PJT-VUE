@@ -59,7 +59,7 @@
             </nav>
         </div>
         <!-- header 타이틀 -->
-        <div class="jumbotron jumbotron-fluid to-post-list mb-0" v-bind:style="{ 'background-image':'url(https://lh3.googleusercontent.com/proxy/CNHMFCMXH7GLLc47r62JQYe-wnk4DCDnXQ5eygWrsqp4fOBmWcyHyIrLprgTnmosS6fj-TUnIUnq1SBz2laXiCAifZN9MX73ON7r-d_GtM9KSradAIp_j8b3qtcN6VbBTbgZi7BgOl9CFFoGj7SNPki06uT7E2i7RyctA0nADZKZpBGJqhiW_KA3WtRmPEORWAW_OKKHTU9k-Fll85CW2Bfs_1pX_z0qjS9XLpBNdfHl7xmD5uk13gyClRxrylwqUQRpu1FtsCTm0rVo9paj3bNImJxUCctlbMJ6GXyeJcybWj6pIc3tsqB3kAOHmA)'}">
+        <div class="jumbotron jumbotron-fluid to-post-list mb-0" v-bind:style="{ 'background-image':'url(@/assets/img/jumboimg.jpg)'}">
             <div class="container-fluid text-center">
                 <h2><router-link to="/" style="color:white; text-decoration:none"><b>HAPPY HOUSE</b></router-link></h2>
                 <hr class="my-4">

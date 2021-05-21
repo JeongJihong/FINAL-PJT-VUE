@@ -48,7 +48,7 @@
 
 <script>
 import axios from 'axios';
-import QnaListItem from '../../components/qna/QnaListItem.vue';
+import QnaListItem from '@/components/qna/QnaListItem.vue';
 import { mapActions, mapMutations } from 'vuex';
 export default {
   components: { QnaListItem },

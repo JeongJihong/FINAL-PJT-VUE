@@ -2,12 +2,12 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Home from "../views/Home.vue";
-import Search from "../views/Search.vue";
-import Member from "../views/Member.vue";
-import MemberLogin from "../views/MemberLogin.vue";
-import MemberInsert from "../views/MemberInsert.vue";
-import MemberFindPassword from "../views/MemberFindPassword.vue";
-import MemberInfo from "../views/MemberInfo.vue";
+import Search from "../views/search/Search.vue";
+import Member from "../views/member/Member.vue";
+import MemberLogin from "../views/member/MemberLogin.vue";
+import MemberInsert from "../views/member/MemberInsert.vue";
+import MemberFindPassword from "../views/member/MemberFindPassword.vue";
+import MemberInfo from "../views/member/MemberInfo.vue";
 import ArticleList from "../views/ArticleList.vue";
 import Qna from "../views/qna/Qna.vue";
 import QnaList from "../views/qna/QnaList.vue";
