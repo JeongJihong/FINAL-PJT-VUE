@@ -1,7 +1,7 @@
 <template>
     <section class="container-fluid">
         <!-- 환경점검 데이터 -->
-        <div class="mb-2" v-if="searchData.envcheck !== null">
+        <!-- <div class="mb-2" v-if="searchData.envcheck !== null">
             <b-row><b-button v-b-toggle.collapse-1 variant="primary" class="m-2">환경 점검 내역</b-button></b-row>
             <b-collapse id="collapse-1" class="mt-2">
                 <b-row>
@@ -43,10 +43,10 @@
                     </template>
                 </b-row>
             </b-collapse>
-        </div>
+        </div> -->
 			
         <!-- 병원 데이터 -->
-        <div class="mb-2" v-if="searchData.hospitaldata !== null">
+        <!-- <div class="mb-2" v-if="searchData.hospitaldata !== null">
             <b-row><b-button v-b-toggle.collapse-2 variant="primary" class="m-2">국민 안심병원 정보</b-button></b-row>
             <b-collapse id="collapse-2" class="mt-2">
                 <b-row>
@@ -74,11 +74,11 @@
                     </template>
                 </b-row>
             </b-collapse>
-        </div>
+        </div> -->
 		
 		<div class="mb-2">
             <b-row>
-                <div v-if="searchData.housedeal.length == 0" class="card col-sm-2 p-0 m-2">
+                <div v-if="apts.length == 0" class="card col-sm-2 p-0 m-2">
                     <div class="card-header">결과 없음</div>
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
@@ -87,14 +87,14 @@
                     </div>
                 </div>
 
-                <template v-for="(deal, index) in searchData.housedeal">
+                <template v-for="(deal, index) in apts">
                     <div class="card col-sm-2 p-0 m-2" :key="index">
-                        <div class="card-header">{{ deal.aptName }}</div>
+                        <div class="card-header">{{ deal.아파트 }}</div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
-                                <h6>동 : {{deal.dong }}</h6>
-                                <h6>가격 : {{ deal.dealAmount }}</h6>
-                                <h6>날짜 : {{ deal.dealYear }}년 {{ deal.dealMonth }}월 {{ deal.dealDay }}일</h6>
+                                <h6>동 : {{deal.법정동 }}</h6>
+                                <h6>가격 : {{ deal.거래금액 }}</h6>
+                                <h6>날짜 : {{ deal.년 }}년 {{ deal.월 }}월 {{ deal.일 }}일</h6>
                             </blockquote>
                         </div>
                     </div>
@@ -105,14 +105,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 export default {
     computed: {
-        ...mapGetters(['searchData'])
+        apts() {
+			return this.$store.state.apts;
+		},
     },
 }
 </script>
 
 <style>
-
 </style>

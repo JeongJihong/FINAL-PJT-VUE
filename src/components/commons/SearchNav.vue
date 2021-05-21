@@ -3,21 +3,26 @@
 		<div class="text-center">
 			<div class="dropdown bg-dark p-1">
 				<div class="btn-group">
-					<div class="btn-group">
-						<div class="text-white mr-2">도시 <select id="sido" class="btn btn-light p-0" v-model="selectSido">
-							<option value="0" class="text-dark">선택</option>
-							<option v-for="(sido, index) in sidos" :key="index" :value=sido.sido_code>{{ sido.sido_name }}</option>
-						</select></div>
-						<div class="text-white mr-2">구 <select id="gugun" class="btn btn-light p-0" v-model="selectGugun">
-							<option value="0" class="text-dark">선택</option>
-							<option v-for="(gugun, index) in guguns" :key="index" :value=gugun.gugun_code>{{ gugun.gugun_name }}</option>
-						</select></div>
-						<div class="text-white mr-2">동 <select id="dong" class="btn btn-light p-0" v-model="selectDong">
-							<option value="0" class="text-dark">선택</option>
-							<option v-for="(dong, index) in dongs" :key="index" :value=dong.dong>{{ dong.dong }}</option>
-						</select></div>
-					</div>
-					<button class="btn btn-outline-light ml-2 mr-2 pt-0 pb-0" @click.prevent="searchByDong()">Search</button>
+					<div class="text-white mr-2">도시 <select class="btn btn-light p-1" v-model="selectSido">
+						<option value="0" class="text-dark">선택</option>
+						<option v-for="(sido, index) in sidos" :key="index" :value=sido.sido_code>{{ sido.sido_name }}</option>
+					</select></div>
+					<div class="text-white mr-2">구 <select class="btn btn-light p-1" v-model="selectGugun">
+						<option value="0" class="text-dark">선택</option>
+						<option v-for="(gugun, index) in guguns" :key="index" :value=gugun.gugun_code>{{ gugun.gugun_name }}</option>
+					</select></div>
+					<div class="text-white mr-2">동 <select class="btn btn-light p-1" v-model="selectDong">
+						<option value="0" class="text-dark">선택</option>
+						<option v-for="(dong, index) in dongs" :key="index" :value=dong.code>{{ dong.dong }}</option>
+					</select></div>
+					<div class="text-white mr-2">년 <select class="btn btn-light p-1" v-model="selectYear">
+						<option value="0" class="text-dark">선택</option>
+						<option v-for="index in 22" :key="index + 1999" :value="index + 1999">{{ index + 1999 + " 년" }}</option>
+					</select></div>
+					<div class="text-white mr-2">월 <select class="btn btn-light p-1" v-model="selectMonth">
+						<option v-for="index in 12" :key="index" :value="index">{{ index + " 월" }}</option>
+					</select></div>
+					
 					<!-- <button id="insert_interest_btn" class="btn btn-outline-light ml-2 mr-5 pt-0 pb-0">관심지역등록</button>
 				
 					<div class="btn-group">
@@ -28,6 +33,7 @@
 					<button type="submit" class="btn btn-outline-light ml-2 mr-2 pt-0 pb-0">Search</button>
 					<button type="button" id="delete_interest_btn" class="btn btn-outline-light ml-2 pt-0 pb-0">관심지역삭제</button> -->
 				</div>
+				<button class="btn btn-outline-light ml-2 mr-2 pt-1 pb-1" @click.prevent="searchAptList()">Search</button>
 			</div>
 		</div>
 	</section>
@@ -44,6 +50,8 @@ export default {
             selectSido: '0',
 			selectGugun: '0',
 			selectDong: '0',
+			selectYear: '2021',
+			selectMonth: '1',
         };
     },
 
@@ -52,8 +60,20 @@ export default {
 			getSidoList: "getSidoList",
 			getGugunList: "getGugunList",
 			getDongList: "getDongList",
+			getAptList: "getAptList",
 			getAptListByDong: "getAptListByDong",
 		}),
+
+		searchAptList() {
+			let date = "";
+			if(this.selectMonth < 10) {
+				date = [this.selectYear, 0, this.selectMonth].join("")
+			} else {
+				date = [this.selectYear, this.selectMonth].join("")
+			}
+			this.getAptList({ "dong": this.selectDong, "date": date });
+			if(this.$route.path !== "/search") this.$router.replace("/search");
+		},
 
 		searchByDong() {
 			// console.log(this.selectGugun + "|" + this.selectDong);

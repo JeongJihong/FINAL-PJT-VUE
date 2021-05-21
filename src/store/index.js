@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import axios from 'axios';
 import createPersistedState from 'vuex-persistedstate';
 
+import happyHouse from "@/js/http-happy-house";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -28,7 +30,7 @@ export default new Vuex.Store({
 
   mutations: {
     GET_APT_LIST(state, apts) {
-      // console.log(state, apts);
+      console.log(state, apts);
       state.apts = apts;
     },
 
@@ -59,32 +61,38 @@ export default new Vuex.Store({
     },
 
     SEARCH_QNA_LIST(state, qnas) {
-      console.log(qnas);
+      // console.log(qnas);
       state.qnas = qnas;
     }
   },
 
   actions: {
-    getAptList({ commit }, dongCode, date) {
+    getAptList({ commit }, data) {
+      const SERVICE_URL ='http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev';
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
-      const SERVICE_URL = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev';
 
       const params = {
-        LAWD_CD: dongCode,
-        DEAL_YMD: date,
+        LAWD_CD: data.dong,
+        DEAL_YMD: data.date,
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
+      // console.log(params);
 
       axios
-      .get(SERVICE_URL, {
-        params,
-      })
-      .then((response) => {
-        commit('GET_APT_LIST', response.data.response.body.items.item);
-      })
-      .catch((error) => {
-        console.dir(error);
-      });
+        .get(SERVICE_URL, {
+          params,
+        })
+        .then((response) => {
+          // console.log(response.data);
+          if (response.data.response.body.items === "") {
+            commit('GET_APT_LIST', []);
+          } else {
+            commit('GET_APT_LIST', response.data.response.body.items.item);
+          }
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
     },
 
     getSidoList({ commit }, data) {
