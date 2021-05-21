@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="col-lg-8 container-fluid" align="center">
-      <h2>QnA</h2>
+      <h2>Q&A</h2>
       <router-link to="/qna/write" class="btn btn-primary m-2">글쓰기</router-link>
       <table class="table table-borderless">
         <tr>
@@ -34,8 +34,8 @@
 
       <!-- 작성한 글이 있을경우 목록출력 -->
       <table v-if="qnaData.list !== 'null'" class="table table-active">
-        <qn-a-list-item v-for="(qna, index) in qnaData.list" :key="index" :qna="qna">
-        </qn-a-list-item>
+        <qna-list-item v-for="(qna, index) in qnaData.list" :key="index" :qna="qna">
+        </qna-list-item>
       </table>
       <!-- <table align="center">
         <tr>
@@ -48,10 +48,10 @@
 
 <script>
 import axios from 'axios';
-import QnAListItem from '../components/QnAListItem.vue';
+import QnaListItem from '../../components/qna/QnaListItem.vue';
 import { mapActions, mapMutations } from 'vuex';
 export default {
-  components: { QnAListItem },
+  components: { QnaListItem },
 
   data() {
     return {

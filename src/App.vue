@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import HeaderNav from '@/components/HeaderNav';
-import FooterNav from '@/components/FooterNav';
-import SearchNav from '@/components/SearchNav';
+import HeaderNav from '@/components/commons/HeaderNav';
+import FooterNav from '@/components/commons/FooterNav';
+import SearchNav from '@/components/commons/SearchNav';
 
 export default {
   name: 'App',

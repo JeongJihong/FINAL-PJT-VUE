@@ -7,12 +7,12 @@ import Member from "../views/Member.vue";
 import MemberLogin from "../views/MemberLogin.vue";
 import MemberInsert from "../views/MemberInsert.vue";
 import MemberFindPassword from "../views/MemberFindPassword.vue";
-import ArticleList from "../views/ArticleList.vue";
-import QnA from "../views/QnA.vue";
-import QnAList from "../views/QnAList.vue";
-import QnAWrite from "../views/QnAWrite.vue";
-import QnAModify from "../views/QnAModify.vue";
 import MemberInfo from "../views/MemberInfo.vue";
+import ArticleList from "../views/ArticleList.vue";
+import Qna from "../views/qna/Qna.vue";
+import QnaList from "../views/qna/QnaList.vue";
+import QnaModify from "../views/qna/QnaModify.vue";
+import QnaWrite from "../views/qna/QnaWrite.vue";
 
 Vue.use(VueRouter);
 
@@ -73,23 +73,23 @@ const routes = [
   {
     path: "/qna",
     name: "qna",
-    component: QnA,
+    component: Qna,
     redirect: "/qna/list",
     children: [
       {
         path: "list",
         name: "qnalist",
-        component: QnAList,
+        component: QnaList,
       },
       {
         path: "write",
         name: "qnawrite",
-        component: QnAWrite,
+        component: QnaWrite,
       },
       {
         path: "modify/:no",
         name: "qnamodify",
-        component: QnAModify,
+        component: QnaModify,
       },
     ],
   },

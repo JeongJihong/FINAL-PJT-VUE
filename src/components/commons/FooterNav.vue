@@ -4,7 +4,7 @@
 		<div class="container m-1">
 			<div class="row">
 				<div class="col-1 p-1">
-					<img src="../assets/img/ssafy-logo.png" class="img-fluid" alt="ssafy">
+					<img src="../../assets/img/ssafy-logo.png" class="img-fluid" alt="ssafy">
 				</div>
 				<div class="col-11">
 			    	<h4>Find Us</h4>

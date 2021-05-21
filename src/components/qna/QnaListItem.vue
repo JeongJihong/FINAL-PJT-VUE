@@ -32,7 +32,7 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
-    name: 'QnAListItem',
+    name: 'QnaListItem',
 
     props: ['qna'],
 
@@ -46,10 +46,9 @@ export default {
             this.deleteQna(this.qna.qnAno);
             this.$router.replace("/");
         },
-    }
+    },
 }
 </script>
 
 <style>
-
 </style>
