@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 import createPersistedState from "vuex-persistedstate";
 
-import happyHouse from "@/js/http-happy-house";
+//import happyHouse from "@/js/http-happy-house";
 
 Vue.use(Vuex);
 
@@ -240,7 +240,7 @@ export default new Vuex.Store({
       const addr = "http://localhost/qna/";
 
       axios
-        .put(addr + data.qnAno, data)
+        .put(addr + data.qnano, data)
         .then((response) => {
           console.log(response);
         })

@@ -2,10 +2,10 @@
   <div>
     <div class="col-lg-8 container-fluid" align="center">
       <h2>Q&A</h2>
-      <router-link to="/qna/write" class="btn btn-primary m-2">글쓰기</router-link>
+      <router-link to="/qna/create" class="btn btn-primary m-2">글쓰기</router-link>
       <table class="table table-borderless">
         <tr>
-          <td class="p-0">
+          <td>
             <select class="form-control" name="key" v-model="option">
               <option value="qnano" selected="selected">글번호</option>
               <option value="subject">제목</option>
@@ -13,7 +13,7 @@
               <option value="answer">답변</option>
             </select>
           </td>
-          <td class="p-0">
+          <td enter-active-class="">
             <input
               type="text"
               class="form-control"
@@ -21,7 +21,7 @@
               v-model="searchText"
             />
           </td>
-          <td class="p-0">
+          <td class>
             <button class="btn btn-primary" @click.prevent="searchQnaByOption">검색</button>
             <button class="btn btn-primary" @click.prevent="getQnaList">전체 목록</button>
           </td>
@@ -29,7 +29,7 @@
       </table>
 
       <!-- 작성한 글이 없을경우 출력 -->
-      <table v-if="pageArray === 'null'" class="table table-active">
+      <table v-if="qnaData.list === 'null'" class="table">
         <tbody>
           <tr class="table-info" align="center">
             <td>작성된 글이 없습니다.</td>
@@ -43,8 +43,8 @@
         </qna-list-item>
       </table> -->
 
-      <table v-if="pageArray !== 'null'" class="table table-active">
-        <qna-paginated-list :list-array="pageArray" />
+      <table v-if="qnaData.list !== 'null'" class="table">
+        <qna-paginated-list :list-array="qnaData.list" />
       </table>
 
       <!-- <table align="center">
@@ -94,25 +94,11 @@ export default {
     },
   },
 
-  // computed: {
-  //   qnaData() {
-  //     return this.$store.state.qnas;
-  //   },
-  // },
-
-  // created() {
-  //   const addr = "http://localhost/qna/list";
-
-  //   axios
-  //     .get(addr)
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       this.GET_QNA_LIST(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.dir(error);
-  //     });
-  // },
+  computed: {
+    qnaData() {
+      return this.$store.state.qnas;
+    },
+  },
 
   created() {
     const addr = "http://localhost/qna/list";
@@ -121,7 +107,7 @@ export default {
       .get(addr)
       .then((response) => {
         console.log(response.data);
-        this.pageArray = response.data.list;
+        this.GET_QNA_LIST(response.data);
       })
       .catch((error) => {
         console.dir(error);

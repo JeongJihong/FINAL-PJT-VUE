@@ -14,9 +14,9 @@
         <th>작성자</th>
         <th>날짜</th>
       </tr>
-      <tr v-for="p in paginatedData" :key="p.qnAno">
-        <td>{{ p.qnAno }}</td>
-        <td><router-link :to="'view/' + p.qnAno">{{ p.subject }}</router-link></td>
+      <tr v-for="p in paginatedData" :key="p.qnano">
+        <td>{{ p.qnano }}</td>
+        <td><router-link :to="'view/' + p.qnano">{{ p.subject }}</router-link></td>
         <td>{{ p.id }}</td>
         <td>{{ p.regtime }}</td>
       </tr>
@@ -38,6 +38,8 @@ export default {
   name: 'paginated-list',
   data () {
     return {
+      option: 'qnano',
+      searchText: '',
       pageNum: 0
     }
   },
@@ -58,7 +60,7 @@ export default {
     },
     prevPage () {
       this.pageNum -= 1;
-    }
+    },
   },
   computed: {
     pageCount () {
@@ -77,8 +79,8 @@ export default {
       const start = this.pageNum * this.pageSize,
             end = start + this.pageSize;
       return this.listArray.slice(start, end);
-    }
-  }
+    },
+  },
 }
 </script>
 

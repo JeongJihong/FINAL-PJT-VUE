@@ -12,6 +12,7 @@ import ArticleList from "../views/ArticleList.vue";
 import Qna from "../views/qna/Qna.vue";
 import QnaList from "../views/qna/QnaList.vue";
 import QnaModify from "../views/qna/QnaModify.vue";
+import QnaCreate from "../views/qna/QnaCreate.vue";
 import QnaWrite from "../views/qna/QnaWrite.vue";
 
 Vue.use(VueRouter);
@@ -85,6 +86,11 @@ const routes = [
         path: "write",
         name: "qnawrite",
         component: QnaWrite,
+      },
+      {
+        path: "create",
+        name: "qnacreate",
+        component: QnaCreate,
       },
       {
         path: "modify/:no",
