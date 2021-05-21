@@ -13,7 +13,7 @@
 					</select></div>
 					<div class="text-white mr-2">동 <select class="btn btn-light p-1" v-model="selectDong">
 						<option value="0" class="text-dark">선택</option>
-						<option v-for="(dong, index) in dongs" :key="index" :value=dong.code>{{ dong.dong }}</option>
+						<option v-for="(dong, index) in dongs" :key="index" :value=dong.dong>{{ dong.dong }}</option>
 					</select></div>
 					<div class="text-white mr-2">년 <select class="btn btn-light p-1" v-model="selectYear">
 						<option value="0" class="text-dark">선택</option>
@@ -61,6 +61,7 @@ export default {
 			getGugunList: "getGugunList",
 			getDongList: "getDongList",
 			getAptList: "getAptList",
+			getHouseList: "getHouseList",
 			getAptListByDong: "getAptListByDong",
 		}),
 
@@ -71,8 +72,9 @@ export default {
 			} else {
 				date = [this.selectYear, this.selectMonth].join("")
 			}
-			
-			this.getAptList({ "dong": this.selectDong, "date": date });
+
+			this.getAptList({ "dong": this.selectGugun, "date": date });
+			this.getHouseList({ "dong": this.selectGugun, "date": date });
 			if(this.$route.path !== "/search") this.$router.replace("/search");
 		},
 

@@ -99,18 +99,98 @@
                         </div>
                     </div>
                 </template>
+                <template v-for="(deal, index) in houses">
+                    <div class="card col-sm-2 p-0 m-2" :key="index">
+                        <div class="card-header">{{ deal.연립다세대 }}</div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <h6>동 : {{deal.법정동 }}</h6>
+                                <h6>가격 : {{ deal.거래금액 }}</h6>
+                                <h6>날짜 : {{ deal.년 }}년 {{ deal.월 }}월 {{ deal.일 }}일</h6>
+                            </blockquote>
+                        </div>
+                    </div>
+                </template>
             </b-row>
 		</div>
 	</section>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     computed: {
         apts() {
 			return this.$store.state.apts;
 		},
+
+        houses() {
+            return this.$store.state.houses;
+        },
     },
+
+    created: {
+        getAptList({ commit }, data) {
+            const SERVICE_URL = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade";
+            const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+
+            const params = {
+            LAWD_CD: data.dong,
+            DEAL_YMD: data.date,
+            serviceKey: decodeURIComponent(SERVICE_KEY),
+            };
+            // console.log(params);
+
+            axios
+            .get(SERVICE_URL, {
+                params,
+            })
+            .then((response) => {
+                // console.log(response.data);
+                if (response.data.response.body.items === "") {
+                commit("GET_APT_LIST", []);
+                } else {
+                commit("GET_APT_LIST", response.data.response.body.items.item);
+                }
+            })
+            .catch((error) => {
+                console.dir(error);
+            });
+        },
+
+        getHouseList({ commit }, data) {
+            const SERVICE_URL = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade";
+            const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+
+            const params = {
+            LAWD_CD: data.dong,
+            DEAL_YMD: data.date,
+            serviceKey: decodeURIComponent(SERVICE_KEY),
+            };
+            // console.log(params);
+
+            axios
+            .get(SERVICE_URL, {
+                params,
+            })
+            .then((response) => {
+                // console.log(response.data);
+                if (response.data.response.body.items === "") {
+                commit("GET_HOUSE_LIST", []);
+                } else {
+                commit("GET_HOUSE_LIST", response.data.response.body.items.item);
+                }
+            })
+            .catch((error) => {
+                console.dir(error);
+            });
+        },
+
+        searchByAptName() {
+            this.getAptListByAptName(this.searchText);
+            if(this.$route.path !== "/search") this.$router.replace("/search");
+        },
+    }
 }
 </script>
 
