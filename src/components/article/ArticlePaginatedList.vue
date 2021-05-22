@@ -40,7 +40,8 @@ export default {
     return {
       option: 'articleno',
       searchText: '',
-      pageNum: 0
+      pageNum: 0,
+      reverseArray: this.listArray.reverse(),
     }
   },
   props: {
@@ -78,7 +79,7 @@ export default {
     paginatedData () {
       const start = this.pageNum * this.pageSize,
             end = start + this.pageSize;
-      return this.listArray.reverse().slice(start, end);
+      return this.reverseArray.slice(start, end);
     },
   },
 
