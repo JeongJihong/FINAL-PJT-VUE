@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="col-lg-8 container-fluid" align="center">
-      <h2>공지 사항</h2>
+      <h2>자유게시판</h2>
 
       <table class="table table-borderless">
         <tr>
