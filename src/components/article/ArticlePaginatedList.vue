@@ -14,10 +14,10 @@
         <th>작성자</th>
         <th>날짜</th>
       </tr>
-      <tr v-for="p in paginatedData" :key="p.qnano">
-        <td>{{ p.qnano }}</td>
-        <td><router-link :to="'view/' + p.qnano">{{ p.subject }}</router-link></td>
-        <td>{{ p.id }}</td>
+      <tr v-for="p in paginatedData" :key="p.articleno">
+        <td>{{ p.articleno }}</td>
+        <td><router-link :to="'view/' + p.articleno">{{ p.subject }}</router-link></td>
+        <td>{{ p.userId }}</td>
         <td>{{ p.regtime }}</td>
       </tr>
     </table>
@@ -38,7 +38,7 @@ export default {
   name: 'paginated-list',
   data () {
     return {
-      option: 'qnano',
+      option: 'articleno',
       searchText: '',
       pageNum: 0
     }

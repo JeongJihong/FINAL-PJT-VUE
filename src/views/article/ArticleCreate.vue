@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import WriteForm from "@/views/qna/QnaWrite.vue";
+import WriteForm from "@/views/article/ArticleWrite.vue";
 
 export default {
-  name: "qnacreate",
+  name: "articlecreate",
   components: {
     WriteForm
   }

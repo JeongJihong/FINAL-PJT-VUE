@@ -17,6 +17,9 @@ export default new Vuex.Store({
 
     qnas: [],
     qna: [],
+
+    articles: [],
+    article: [],
   },
 
   getters: {
@@ -30,6 +33,14 @@ export default new Vuex.Store({
 
     qna(state) {
       return state.qna;
+    },
+
+    articleData(state) {
+      return state.articles;
+    },
+
+    article(state) {
+      return state.article;
     },
   },
 
@@ -78,11 +89,20 @@ export default new Vuex.Store({
       // console.log(qnas);
       state.qnas = qnas;
     },
+
+    GET_ARTICLE_LIST(state, articles) {
+      state.articles = articles;
+    },
+
+    GET_ARTICLE(state, article) {
+      state.article = article;
+    },
   },
 
   actions: {
     getAptList({ commit }, data) {
-      const SERVICE_URL = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade";
+      const SERVICE_URL =
+        "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade";
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
 
       const params = {
@@ -110,7 +130,8 @@ export default new Vuex.Store({
     },
 
     getHouseList({ commit }, data) {
-      const SERVICE_URL = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade";
+      const SERVICE_URL =
+        "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade";
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
 
       const params = {
@@ -285,6 +306,94 @@ export default new Vuex.Store({
     deleteQna(context, no) {
       console.log(no);
       const addr = "http://localhost/qna/";
+
+      axios
+        .delete(addr + no)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    getArticleList({ commit }) {
+      const addr = "http://localhost/article/list";
+
+      axios
+        .get(addr)
+        .then((response) => {
+          console.log(response.data);
+          commit("GET_ARTICLE_LIST", response.data);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    getArticle({ commit }, payload) {
+      axios
+        .get(payload)
+        .then((response) => {
+          console.log(response.data);
+          commit("GET_ARTICLE", response.data);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    searchArticleList({ commit }, option) {
+      console.log(option.key + "|" + option.word);
+      const addr = "http://localhost/article/search";
+
+      axios
+        .get(addr, {
+          params: {
+            key: option.key,
+            word: option.word,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          commit("GET_ARTICLE_LIST", response.data);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    registerArticle(context, data) {
+      console.log(data);
+      const addr = "http://localhost/article/register";
+
+      axios
+        .post(addr, data)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    modifyArticle(context, data) {
+      console.log(data);
+      const addr = "http://localhost/article/";
+
+      axios
+        .put(addr + data.articleno, data)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    deleteArticle(context, no) {
+      console.log(no);
+      const addr = "http://localhost/article/";
 
       axios
         .delete(addr + no)
