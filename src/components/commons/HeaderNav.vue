@@ -48,7 +48,7 @@
           <ul class="navbar-nav">
             <!-- <li class="nav-item"><router-link to="/article/list" class="btn mr-2">공지 사항</router-link></li> -->
             <li class="nav-item">
-              <button class="btn mr-2" @click.prevent="searchQna">자유게시판</button>
+              <button class="btn mr-2" @click.prevent="searchArticle">자유게시판</button>
             </li>
             <li class="nav-item">
               <button class="btn mr-2" @click.prevent="searchQna">QnA</button>
@@ -111,6 +111,10 @@ export default {
 
     searchQna() {
       if (this.$route.path !== "/qna/list") this.$router.replace("/qna/list");
+    },
+    
+    searchArticle() {
+      if (this.$route.path !== "/article/list") this.$router.replace("/article/list");
     },
   },
 };

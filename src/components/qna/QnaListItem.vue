@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-8 container-fluid" align="center">
+  <div class="table col-lg-8 container-fluid" align="center">
     <table>
       <tr>
         <th>번호</th>
