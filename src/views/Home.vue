@@ -1,6 +1,5 @@
 <template>
   <section id="main-contents" class="container-fluid">
-    <map-view />
     <!-- content -->
     <div class="row m-5">
       <!-- AD -->

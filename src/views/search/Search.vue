@@ -112,7 +112,7 @@
             </div>
           </div>
         </template>
-        <div>
+        <div class="card col-sm-2 p-0 m-2" :key="index">
           <b-card
             title="Card Title"
             img-top
