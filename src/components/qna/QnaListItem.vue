@@ -1,38 +1,42 @@
 <template>
-  <div>
-    <tr>
-      <th>번호</th>
-      <td>{{ qna.qnano }}</td>
-    </tr>
-    <tr>
-      <th>제목</th>
-      <td>{{ qna.subject }}</td>
-    </tr>
-    <tr>
-      <th>작성일</th>
-      <td>{{ qna.regtime }}</td>
-    </tr>
-    <tr>
-      <th>내용</th>
-      <td>{{ qna.content }}</td>
-    </tr>
-    <tr>
-      <th>답변</th>
-      <td>{{ qna.answer }}</td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center" class="tfoot tspacial">
-        <router-link :to="'/qna/modify/' + qna.qnano" class="btn btn-sm btn-warning mr-2">수정</router-link>
-        <button class="btn btn-sm btn-danger mr-2" @click.prevent="removeQna" :name="qna.qnano">
-          삭제
-        </button>
-      </td>
-    </tr>
+  <div class="col-lg-8 container-fluid" align="center">
+    <table>
+      <tr>
+        <th>번호</th>
+        <td>{{ qna.qnano }}</td>
+      </tr>
+      <tr>
+        <th>제목</th>
+        <td>{{ qna.subject }}</td>
+      </tr>
+      <tr>
+        <th>작성일</th>
+        <td>{{ qna.regtime }}</td>
+      </tr>
+      <tr>
+        <th>내용</th>
+        <td>{{ qna.content }}</td>
+      </tr>
+      <tr>
+        <th>답변</th>
+        <td>{{ qna.answer }}</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" class="tfoot tspacial">
+          <router-link :to="'/qna/modify/' + qna.qnano" class="btn btn-sm btn-warning mr-2"
+            >수정</router-link
+          >
+          <button class="btn btn-sm btn-danger mr-2" @click.prevent="removeQna" :name="qna.qnano">
+            삭제
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "QnaListItem",

@@ -2,7 +2,7 @@
   <div>
     <div class="col-lg-8 container-fluid" align="center">
       <h2>Q&A</h2>
-      <router-link to="/qna/create" class="btn btn-primary m-2">글쓰기</router-link>
+      <router-link to="/qna/create" class="btn btn-secondary m-2 float-right">글쓰기</router-link>
       <table class="table table-borderless">
         <tr>
           <td>
