@@ -78,9 +78,10 @@ export default {
     paginatedData () {
       const start = this.pageNum * this.pageSize,
             end = start + this.pageSize;
-      return this.listArray.slice(start, end);
+      return this.listArray.reverse().slice(start, end);
     },
   },
+
 }
 </script>
 

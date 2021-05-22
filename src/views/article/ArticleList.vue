@@ -37,21 +37,9 @@
         </tbody>
       </table>
 
-      <!-- 작성한 글이 있을경우 목록출력 -->
-      <!-- <table v-if="articleData.list !== 'null'" class="table table-active">
-        <article-list-item v-for="(article, index) in articleData.list" :key="index" :article="article">
-        </article-list-item>
-      </table> -->
-
       <table v-if="articleData.list !== 'null'" class="table">
         <article-paginated-list :list-array="articleData.list" />
       </table>
-
-      <!-- <table align="center">
-        <tr>
-          <td>${navigation.navigator}</td>
-        </tr>
-      </table> -->
     </div>
   </div>
 </template>

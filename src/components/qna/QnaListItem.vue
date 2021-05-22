@@ -17,10 +17,10 @@
         <th>내용</th>
         <td>{{ qna.content }}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th>답변</th>
         <td>{{ qna.answer }}</td>
-      </tr>
+      </tr> -->
       <tr>
         <td colspan="2" align="center" class="tfoot tspacial">
           <router-link :to="'/qna/modify/' + qna.qnano" class="btn btn-sm btn-warning mr-2"
@@ -32,6 +32,17 @@
         </td>
       </tr>
     </table>
+    <br>
+    <div v-if="qna.answer != ''" class="regist_form">
+      <!-- <textarea id="comment" name="comment" v-model="modifyComment.comment" cols="35" rows="2"></textarea> -->
+      <textarea id="comment" name="comment" v-model="qna.answer" cols="35" rows="2"></textarea>
+      <button style="float: right;" class="small" @click="updateCommentCancel">취소</button>
+      <button style="float: right;" class="small" @click="updateComment">수정</button>
+    </div>
+    <div v-else class="regist_form">
+      <textarea id="comment" name="comment" v-model="qna.answer" cols="35" rows="2"></textarea>
+      <button style="float: right;" @click="registComment">등록</button>
+    </div>
   </div>
 </template>
 
@@ -45,7 +56,6 @@ export default {
       no: "",
     };
   },
-
   computed: {
     ...mapGetters(["qna"]),
   },
@@ -59,11 +69,11 @@ export default {
       deleteQna: "deleteQna",
     }),
 
-    // removeQna() {
-    //   console.log(this.qna);
-    //   this.deleteQna(this.qna.qnano);
-    //   this.$router.replace("/");
-    // },
+    removeQna() {
+      console.log(this.qna);
+      this.deleteQna(this.qna.qnano);
+      this.$router.replace("/");
+    },
 
     removeQna() {
       if (confirm("정말로 삭제하시겠습니까?")) {
@@ -77,6 +87,42 @@ export default {
         });
       }
     },
+
+    registComment() {
+      this.registerQna({ subject: this.subject, content: this.content, answer: this.answer});
+      this.$router.replace("/qna");
+    },
+
   },
 };
 </script>
+
+<style scoped>
+.regist {
+  padding: 10px;
+}
+.regist_form {
+  text-align: left;
+  border-radius: 5px;
+  background-color: #d6e7fa;
+  padding: 20px;
+}
+
+textarea {
+  width: 90%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #787878;
+  font-size: large;
+}
+
+button.small {
+  width: 50px;
+  font-size: small;
+  font-weight: bold;
+}
+</style>
