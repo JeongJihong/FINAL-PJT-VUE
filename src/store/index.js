@@ -10,7 +10,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     apts: [],
+    aptsLength: 0,
     houses: [],
+    housesLength: 0,
     sido: [],
     gugun: [],
     dong: [],
@@ -48,11 +50,13 @@ export default new Vuex.Store({
     GET_APT_LIST(state, apts) {
       // console.log(state, apts);
       state.apts = apts;
+      state.aptsLength = apts.length;
     },
 
     GET_HOUSE_LIST(state, houses) {
       // console.log(state, apts);
       state.houses = houses;
+      state.housesLength = houses.length;
     },
 
     GET_SIDO_LIST(state, sido) {

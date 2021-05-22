@@ -129,6 +129,67 @@ export default {
             console.dir(error);
         });
     },
+
+	
+  // created: {
+  //   getAptList({ commit }, data) {
+  //     const SERVICE_URL =
+  //       "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade";
+  //     const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+
+  //     const params = {
+  //       LAWD_CD: data.dong,
+  //       DEAL_YMD: data.date,
+  //       serviceKey: decodeURIComponent(SERVICE_KEY),
+  //     };
+  //     // console.log(params);
+
+  //     axios
+  //       .get(SERVICE_URL, {
+  //         params,
+  //       })
+  //       .then((response) => {
+  //         // console.log(response.data);
+  //         if (response.data.response.body.items === "") {
+  //           commit("GET_APT_LIST", []);
+  //         } else {
+  //           commit("GET_APT_LIST", response.data.response.body.items.item);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.dir(error);
+  //       });
+  //   },
+
+  //   getHouseList({ commit }, data) {
+  //     const SERVICE_URL =
+  //       "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcRHTrade";
+  //     const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
+
+  //     const params = {
+  //       LAWD_CD: data.dong,
+  //       DEAL_YMD: data.date,
+  //       serviceKey: decodeURIComponent(SERVICE_KEY),
+  //     };
+  //     // console.log(params);
+
+  //     axios
+  //       .get(SERVICE_URL, {
+  //         params,
+  //       })
+  //       .then((response) => {
+  //         // console.log(response.data);
+  //         if (response.data.response.body.items === "") {
+  //           commit("GET_HOUSE_LIST", []);
+  //         } else {
+  //           commit("GET_HOUSE_LIST", response.data.response.body.items.item);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.dir(error);
+  //       });
+  //   },
+  // },
 }
 
 </script>

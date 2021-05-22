@@ -4,7 +4,7 @@
     <div class="row m-5">
       <!-- AD -->
       <article class="col-sm-4">
-        <img src="../assets/img/sideAD.jpg" class="img-thumbnail" alt="ad" />
+        <img src="@/assets/img/sideAD.jpg" class="img-thumbnail" alt="ad" />
       </article>
 
       <!-- 추천 메뉴 -->
