@@ -22,15 +22,14 @@ export default new Vuex.Store({
 
     articles: [],
     article: [],
-
-    loginState: false,
+    
+    member: {
+      loginState: false,
+      loginId: "",
+    },
   },
 
   getters: {
-    searchData(state) {
-      return state.apts;
-    },
-
     qnaData(state) {
       return state.qnas;
     },
@@ -47,8 +46,8 @@ export default new Vuex.Store({
       return state.article;
     },
 
-    getLoginState(state) {
-      return state.loginState;
+    loginState(state) {
+      return state.member.loginState;
     },
   },
 
@@ -106,6 +105,16 @@ export default new Vuex.Store({
 
     GET_ARTICLE(state, article) {
       state.article = article;
+    },
+
+    LOGIN_MEMBER(state, member) {
+      state.member.loginId = member.id;
+      state.member.loginState = true;
+    },
+
+    LOGOUT_MEMBER(state) {
+      state.member.loginId = "";
+      state.member.loginState = false;
     },
   },
 
@@ -413,6 +422,14 @@ export default new Vuex.Store({
         .catch((error) => {
           console.dir(error);
         });
+    },
+
+    loginMember({ commit }, member) {
+      commit("LOGIN_MEMBER", member);
+    },
+
+    logoutMember({ commit }) {
+      commit("LOGOUT_MEMBER");
     },
   },
   modules: {},
