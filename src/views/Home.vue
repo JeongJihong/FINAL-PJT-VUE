@@ -92,13 +92,13 @@
 </template>
 
 <script>
-import MapView from "../components/commons/MapView.vue";
+// import MapView from "../components/commons/MapView.vue";
 export default {
   name: "Home",
 
-  components: {
-    MapView
-  },
+  // components: {
+  //   MapView
+  // },
 };
 </script>
 

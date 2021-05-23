@@ -18,8 +18,7 @@
         <td>{{ article.regtime }}</td>
       </tr>
       <tr>
-        <th>내용</th>
-        <td>{{ article.content }}</td>
+        <td colspan="2">{{ article.content }}</td>
       </tr>
       <tr>
         <td colspan="2" align="center" class="tfoot tspacial">

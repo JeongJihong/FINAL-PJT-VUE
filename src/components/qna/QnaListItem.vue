@@ -1,5 +1,7 @@
 <template>
   <div class="table col-lg-8 container-fluid" align="center">
+    <h2>Q&A</h2>
+    <br>
     <table>
       <tr>
         <th>번호</th>
@@ -14,8 +16,7 @@
         <td>{{ qna.regtime }}</td>
       </tr>
       <tr>
-        <th>내용</th>
-        <td>{{ qna.content }}</td>
+        <td colspan="2">{{ qna.content }}</td>
       </tr>
       <!-- <tr>
         <th>답변</th>
@@ -33,16 +34,17 @@
       </tr>
     </table>
     <br>
-    <div v-if="qna.answer != ''" class="regist_form">
-      <!-- <textarea id="comment" name="comment" v-model="modifyComment.comment" cols="35" rows="2"></textarea> -->
-      <textarea id="comment" name="comment" v-model="qna.answer" cols="35" rows="2"></textarea>
-      <button style="float: right;" class="small" @click="updateCommentCancel">취소</button>
-      <button style="float: right;" class="small" @click="updateComment">수정</button>
-    </div>
-    <div v-else class="regist_form">
-      <textarea id="comment" name="comment" v-model="qna.answer" cols="35" rows="2"></textarea>
-      <button style="float: right;" @click="registComment">등록</button>
-    </div>
+    <b-row class="mt-2">
+    <b-col sm="2">
+      <label for="textarea-default">답변:</label>
+    </b-col>
+    <b-col sm="10">
+      <b-form-textarea
+        id="textarea-default"
+        v-model="qna.answer"
+      >{{ qna.answer }}</b-form-textarea>
+    </b-col>
+  </b-row>
   </div>
 </template>
 
@@ -68,12 +70,6 @@ export default {
     ...mapActions({
       deleteQna: "deleteQna",
     }),
-
-    removeQna() {
-      console.log(this.qna);
-      this.deleteQna(this.qna.qnano);
-      this.$router.replace("/");
-    },
 
     removeQna() {
       if (confirm("정말로 삭제하시겠습니까?")) {
