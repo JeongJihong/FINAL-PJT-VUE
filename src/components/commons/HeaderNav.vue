@@ -19,7 +19,7 @@
         </template>
 
         <template v-if="loginState">
-          <b-nav-item active><button @click="logout">로그아웃</button></b-nav-item>
+          <b-nav-item active><a href="#logout" @click="logout">로그아웃</a></b-nav-item>
           <b-nav-text>|</b-nav-text>
           <b-nav-item active><router-link to="/mem/mvuserinfo">회원정보</router-link></b-nav-item>
           <b-nav-text>|</b-nav-text>
