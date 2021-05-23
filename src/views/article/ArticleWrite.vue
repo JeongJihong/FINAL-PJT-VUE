@@ -16,7 +16,7 @@
         <textarea class="form-control" rows="7" v-model="content"></textarea>
       </div>
       <router-link to="/article/list" style="float: right" class="btn btn-warning">취소</router-link>
-      <button v-if="type == 'create'" style="float: right" vclass="btn btn-primary" @click.prevent="writeArticle">글작성</button>
+      <button v-if="type == 'create'" style="float: right" class="btn btn-primary" @click.prevent="writeArticle">글작성</button>
       <button v-else class="btn btn-primary" style="float: right" @click.prevent="updateArticle">수정</button>
       </div>
   </div>
@@ -24,7 +24,7 @@
 
 <script>
 import axios from "axios";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "articlewrite",
   props: {
@@ -33,10 +33,14 @@ export default {
   data() {
     return {
       articleno: "",
-      id: "ssafy",
+      id: this.$store.state.member.loginId,
       subject: "",
       content: "",
     };
+  },
+
+  computed: {
+    ...mapGetters(["loginState"]),
   },
 
   methods: {
@@ -61,6 +65,10 @@ export default {
     },
   },
   created() {
+    if(!this.loginState) {
+      alert("로그인 후 사용가능합니다!");
+      this.$router.replace("/mem/mvlogin");
+    }
     if (this.type === "modify") {
       axios.get(`http://localhost/article/${this.$route.params.no}`).then(({ data }) => {
         this.articleno = data.articleno;

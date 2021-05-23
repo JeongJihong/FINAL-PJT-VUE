@@ -17,18 +17,19 @@
       </div>
       <div class="form-group" align="left">
         <label for="content">답변</label>
-        <textarea class="form-control" rows="10" v-model="answer"></textarea>
+        <textarea v-if="id == 'admin'" class="form-control" rows="10" v-model="answer"></textarea>
+        <textarea v-else class="form-control" rows="10" v-model="answer" readonly></textarea>
       </div>
-      <button v-if="type == 'create'" vclass="btn btn-primary" @click.prevent="writeQna">글작성</button>
-      <button v-else vclass="btn btn-primary" @click.prevent="updateQna">글수정</button>
-      <router-link to="/qna/list" class="btn btn-warning">취소</router-link>
+      <router-link to="/qna/list" style="float: right" class="btn btn-warning">취소</router-link>
+      <button v-if="type == 'create'" style="float: right" class="btn btn-primary" @click.prevent="writeQna">질문작성</button>
+      <button v-else class="btn btn-primary" style="float: right" @click.prevent="updateQna">수정</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "qnawrite",
   props: {
@@ -37,11 +38,15 @@ export default {
   data() {
     return {
       qnano: "",
-      id: "ssafy",
+      id: this.$store.state.member.loginId,
       subject: "",
       content: "",
       answer: "",
     };
+  },
+
+  computed: {
+    ...mapGetters(["loginState"]),
   },
 
   methods: {
@@ -67,6 +72,10 @@ export default {
     },
   },
   created() {
+    if(!this.loginState) {
+      alert("로그인 후 사용가능합니다!");
+      this.$router.replace("/mem/mvlogin");
+    }
     if (this.type === "modify") {
       axios.get(`http://localhost/qna/${this.$route.params.no}`).then(({ data }) => {
         this.qnano = data.qnano;
