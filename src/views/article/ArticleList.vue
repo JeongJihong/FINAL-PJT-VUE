@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div class="col-lg-8 container-fluid" align="center">
+    <div class="col-lg-8 container-fluid table table-bordered table-condensed" align="center">
+      <br>
       <h2>자유게시판</h2>
       <router-link to="/article/create" class="btn btn-secondary m-2 float-right">글쓰기</router-link>
-      <table class="table table-borderless">
+      <table class="table table-borderless" frame=void>
         <tr>
-          <td>
+          <td> 
             <select class="form-control" name="key" v-model="option">
               <option value="articleno" selected="selected">글번호</option>
               <option value="subject">제목</option>
@@ -21,7 +22,7 @@
               v-model="searchText"
             />
           </td>
-          <td class>
+          <td>
             <button class="btn btn-primary" @click.prevent="searchArticleByOption">검색</button>
             <button class="btn btn-primary" @click.prevent="getArticleList">전체 목록</button>
           </td>
@@ -103,5 +104,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

@@ -74,6 +74,7 @@
     </div>
 
     <!-- <div>
+      <router-link to="/"><img style="height:100px; width: 250px;" src="@/assets/img/hh.png" /></router-link>
       <b-nav>
         <b-nav-item active @click.prevent="searchArticle">자유게시판</b-nav-item>
         <b-nav-item active @click.prevent="searchQna">Q&A</b-nav-item>
@@ -82,7 +83,7 @@
         <b-nav-item active></b-nav-item>
         
         <b-nav-item active><router-link to="/mem/mvlogin">로그인</router-link></b-nav-item>
-        <b-nav-item disabled>|</b-nav-item>
+        <b-nav-text>|</b-nav-text>
         <b-nav-item active><router-link to="/mem/mvinsertmember">회원가입</router-link></b-nav-item>
       </b-nav>
     </div> -->

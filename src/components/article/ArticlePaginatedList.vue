@@ -1,26 +1,28 @@
 <template>
   <div>
-    <table>
-        <colgroup>
-          <col style="width: 10%" />
-          <col style="width: 50%" />
-          <col style="width: 15%" />
-          <col style="width: 25%" />
-        </colgroup>
+    <table id="my-table">
+      <colgroup>
+        <col style="width: 10%" />
+        <col style="width: 50%" />
+        <col style="width: 15%" />
+        <col style="width: 25%" />
+      </colgroup>
       <tr>
         <th>글번호</th>
         <th>제목</th>
-        <!-- <th>조회수</th> -->
         <th>작성자</th>
         <th>날짜</th>
       </tr>
       <tr v-for="p in paginatedData" :key="p.articleno">
         <td>{{ p.articleno }}</td>
-        <td><router-link :to="'view/' + p.articleno">{{ p.subject }}</router-link></td>
+        <td>
+          <router-link :to="'view/' + p.articleno">{{ p.subject }}</router-link>
+        </td>
         <td>{{ p.userId }}</td>
         <td>{{ p.regtime }}</td>
       </tr>
     </table>
+    
     <div class="btn-cover">
       <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
@@ -35,55 +37,54 @@
 
 <script>
 export default {
-  name: 'paginated-list',
-  data () {
+  name: "paginated-list",
+  data() {
     return {
-      option: 'articleno',
-      searchText: '',
+      option: "articleno",
+      searchText: "",
       pageNum: 0,
+      perPage: 10,
+      currentPage: 1,
       reverseArray: this.listArray.reverse(),
-    }
+    };
   },
   props: {
     listArray: {
       type: Array,
-      required: true
+      required: true,
     },
-    pageSize: {
-      type: Number,
-      required: false,
-      default: 10
-    }
   },
   methods: {
-    nextPage () {
+    nextPage() {
       this.pageNum += 1;
     },
-    prevPage () {
+    prevPage() {
       this.pageNum -= 1;
     },
   },
   computed: {
-    pageCount () {
+    pageCount() {
       let listLeng = this.listArray.length,
-          listSize = this.pageSize,
-          page = Math.floor(listLeng / listSize);
+        listSize = this.perPage,
+        page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
-      
+
       /*
       아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
       이런식으로 if 문 없이 고칠 수도 있다!
       */
       return page;
     },
-    paginatedData () {
-      const start = this.pageNum * this.pageSize,
-            end = start + this.pageSize;
+    paginatedData() {
+      const start = this.pageNum * this.perPage,
+        end = start + this.perPage;
       return this.reverseArray.slice(start, end);
     },
+    rows() {
+        return this.listArray.length
+      }
   },
-
-}
+};
 </script>
 
 <style>

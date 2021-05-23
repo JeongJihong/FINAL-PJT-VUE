@@ -1,36 +1,48 @@
 <template>
   <div class="table col-lg-8 container-fluid" align="center">
-    <table>
+    <h2>자유게시판</h2>
+    <br />
+
+    <div class="mt-3">
+    <b-card-group deck>
+      <b-card bg-variant="default" header-tag="header" class="text-center">
+        <template #header>
+            <span class="mb-0" style="font-size:20px; float:left; margin-right: 10px">{{article.articleno}}.</span>
+            <span class="mb-0" style="font-size:20px; float:left;">{{article.subject}}</span>
+            <span class="mb-0" style="font-size:20px; float:right;">{{article.regtime}}</span>
+            <br>
+          </template>
+        <b-card-text style="height: 400px; font-size:20px; float: left;">{{ article.content }}</b-card-text>
+      </b-card>
+    </b-card-group>
+  </div>
+
+    <!-- <table>
       <colgroup>
-          <col style="width: 10%" />
-          <col style="width: 90%" />
-        </colgroup>
+        <col style="width: 10%" />
+        <col style="width: 70%" />
+        <col style="width: 20%" />
+      </colgroup>
       <tr>
-        <th>번호</th>
         <td>{{ article.articleno }}</td>
+        <td style="float: left">{{ article.subject }}</td>
+        <td style="float: right">{{ article.regtime }}</td>
       </tr>
       <tr>
-        <th>제목</th>
-        <td>{{ article.subject }}</td>
+        <td colspan="3">{{ article.content }}</td>
       </tr>
-      <tr>
-        <th>작성일</th>
-        <td>{{ article.regtime }}</td>
-      </tr>
-      <tr>
-        <td colspan="2">{{ article.content }}</td>
-      </tr>
-      <tr>
-        <td colspan="2" align="center" class="tfoot tspacial">
-          <router-link :to="'/article/modify/' + article.articleno" class="btn btn-sm btn-warning mr-2"
-            >수정</router-link
-          >
-          <button class="btn btn-sm btn-danger mr-2" @click.prevent="removeArticle" :name="article.articleno">
-            삭제
-          </button>
-        </td>
-      </tr>
-    </table>
+    </table> -->
+    <br />
+    <button style="float: right"
+      class="btn btn-sm btn-danger mr-2"
+      @click.prevent="removeArticle"
+      :name="article.articleno"
+    >
+      삭제
+    </button>
+    <router-link style="float: right" :to="'/article/modify/' + article.articleno" class="btn btn-sm btn-warning mr-2"
+      >수정</router-link
+    >
   </div>
 </template>
 

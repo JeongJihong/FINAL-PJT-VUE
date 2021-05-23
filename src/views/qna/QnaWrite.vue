@@ -1,18 +1,22 @@
 <template>
   <div class="container" align="center">
-    <div class="col-lg-6" align="center">
+    <div class="col-lg-8" align="center">
       <h2 v-if="type == 'create'">QnA 작성</h2>
       <h2 v-else>QnA 수정</h2>
       <div class="form-group" align="left">
-        <label for="subject">제목:</label>
+        <label for="id">작성자</label>
+        <input readonly type="text" class="form-control" v-model="id" />
+      </div>
+      <div class="form-group" align="left">
+        <label for="subject">제목</label>
         <input type="text" class="form-control" v-model="subject" />
       </div>
       <div class="form-group" align="left">
-        <label for="content">내용:</label>
+        <label for="content">내용</label>
         <textarea class="form-control" rows="7" v-model="content"></textarea>
       </div>
       <div class="form-group" align="left">
-        <label for="content">답변:</label>
+        <label for="content">답변</label>
         <textarea class="form-control" rows="10" v-model="answer"></textarea>
       </div>
       <button v-if="type == 'create'" vclass="btn btn-primary" @click.prevent="writeQna">글작성</button>
@@ -33,7 +37,7 @@ export default {
   data() {
     return {
       qnano: "",
-      id: "",
+      id: "ssafy",
       subject: "",
       content: "",
       answer: "",

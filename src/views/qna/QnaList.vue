@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="col-lg-8 container-fluid" align="center">
+    <div class="col-lg-8 container-fluid table table-bordered table-condensed" align="center">
+      <br>
       <h2>Q&A</h2>
       <router-link to="/qna/create" class="btn btn-secondary m-2 float-right">글쓰기</router-link>
-      <table class="table table-borderless">
+      <table class="table table-borderless"  frame=void>
         <tr>
           <td>
             <select class="form-control" name="key" v-model="option">
