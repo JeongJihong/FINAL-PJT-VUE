@@ -11,23 +11,23 @@
 
         <!-- 로그인 -->
         <article class="col-sm-8">
-          <form id="loginform" class="border rounded container-fluid" method="post" action="">
+          <div class="border rounded container">
             <h4>Login</h4>
             <div class="form-group">
               <label for="usr">ID </label>
-              <input type="text" name="id" id="id" />
+              <input type="text"/>
             </div>
             <div class="form-group">
               <label for="pwd">Password </label>
-              <input type="text" name="password" id="password" />
+              <input type="text"/>
             </div>
-            <div v-if="msg != null" class="text-danger">${msg}</div>
+            <div v-if="msg != null" class="text-danger">{{ msg }}</div>
             <div class="form-group">
               <!-- <button class="btn btn-primary" onclick="javascript:login();">로그인</button> -->
               <router-link class="btn btn-primary" to="/">로그인</router-link>
               <router-link class="btn btn-secondary" to="/">메인으로</router-link>
             </div>
-          </form>
+          </div>
         </article>
       </div>
     </section>
@@ -35,7 +35,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      msg: "",
+    };
+  },
+
+
+  
+};
 </script>
 
 <style>

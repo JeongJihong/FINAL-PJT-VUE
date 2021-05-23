@@ -3,17 +3,17 @@
     <!-- 로그인 메뉴 -->
     <div class="container-fluid navbar-dark bg-dark">
       <nav class="navbar navbar-expand-sm justify-content-end">
-        <!-- <div id="nav-default">
-                    <div class="navbar-collapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item"><router-link to="/mem/mvlogin" class="btn btn-sm btn-outline-light mr-2">Log in</router-link></li>
-                            <li class="nav-item"><router-link to="/mem/mvinsertmember" class="btn btn-sm btn-outline-light mr-2">Sign up</router-link></li>
-                            <li class="nav-item"><router-link to="/mem/mvfindpassword" class="btn btn-sm btn-outline-light mr-2">비밀번호 찾기</router-link></li>
-                        </ul>
-                    </div>
-                </div> -->
+        <div id="nav-default">
+          <div class="navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item"><router-link to="/mem/mvlogin" class="btn btn-sm btn-outline-light mr-2">Log in</router-link></li>
+              <li class="nav-item"><router-link to="/mem/mvinsertmember" class="btn btn-sm btn-outline-light mr-2">Sign up</router-link></li>
+              <li class="nav-item"><router-link to="/mem/mvfindpassword" class="btn btn-sm btn-outline-light mr-2">비밀번호 찾기</router-link></li>
+            </ul>
+          </div>
+        </div>
 
-        <div id="nav-login">
+        <!-- <div id="nav-login">
           <div class="navbar-collapse">
             <ul class="navbar-nav">
               <li class="nav-item">
@@ -33,7 +33,7 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </nav>
     </div>
 

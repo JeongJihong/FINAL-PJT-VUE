@@ -22,6 +22,8 @@ export default new Vuex.Store({
 
     articles: [],
     article: [],
+
+    loginState: false,
   },
 
   getters: {
@@ -43,6 +45,10 @@ export default new Vuex.Store({
 
     article(state) {
       return state.article;
+    },
+
+    getLoginState(state) {
+      return state.loginState;
     },
   },
 
