@@ -22,8 +22,8 @@
           <b-nav-item disabled>{{this.$store.state.member.loginId}}님 안녕하세요</b-nav-item>
           <b-nav-text>|</b-nav-text>
           <b-nav-item active><a href="#logout" @click="logout">로그아웃</a></b-nav-item>
-          <!-- <b-nav-text>|</b-nav-text>
-          <b-nav-item active><router-link to="/mem/mvuserinfo">회원정보</router-link></b-nav-item> -->
+          <b-nav-text>|</b-nav-text>
+          <b-nav-item active><router-link to="/mem/mvuserinfo">회원정보</router-link></b-nav-item>
           <b-nav-text>|</b-nav-text>
           <b-nav-item active><router-link to="/mem/delete">회원탈퇴</router-link></b-nav-item>
         </template>
