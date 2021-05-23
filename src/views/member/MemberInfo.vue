@@ -12,8 +12,6 @@
         <!-- 회원 수정 -->
         <article class="col-sm-8">
           <!--회원수정 창-->
-          <!-- <h3 class="text-secondary">${mem.id}</h3> -->
-          <h3 class="text-secondary">ssafy</h3>
           <div id="head" class="border rounded">
             <form method="post" action="/mem/update" class="container-container-fluid">
               <table class="table">
@@ -27,7 +25,7 @@
                     <td class="tbasic">아 이 디</td>
                     <td class="tbasic">
                       <!-- <input disabled type="text" name="id" id="id" value="${mem.id }" /> -->
-                      <input disabled type="text" name="id" id="id" value="ssafy" />
+                      <input disabled type="text" name="id" id="id" :value="this.$store.state.member.loginId" />
                     </td>
                   </tr>
                   <tr>
@@ -39,13 +37,15 @@
                   <tr>
                     <td class="tbasic">이 &nbsp;름</td>
                     <td class="tbasic">
-                      <input type="text" name="name" id="name" value="이싸피" />
+                      <input v-if="this.$store.state.member.loginId==='ssafy'" type="text" name="name" id="name" value="이싸피" />
+                      <input v-if="this.$store.state.member.loginId==='admin'" type="text" name="name" id="name" value="관리자" />
                     </td>
                   </tr>
                   <tr>
                     <td class="tbasic">이메일</td>
                     <td class="tbasic">
-                      <input type="text" name="email" id="email" value="ssafy@ssafy.com" />
+                      <input v-if="this.$store.state.member.loginId==='ssafy'" type="text" name="email" id="email" value="ssafy@ssafy.com" />
+                      <input v-if="this.$store.state.member.loginId==='admin'" type="text" name="email" id="email" value="admin@ssafy.com" />
                     </td>
                   </tr>
                   <tr>
@@ -75,7 +75,6 @@
 </template>
 
 <script>
-export default {};
 </script>
 
 <style>
