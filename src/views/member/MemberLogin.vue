@@ -252,6 +252,7 @@ input[type=text]:placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
+  background-color: #56baed;
   content: "";
   transition: width 0.2s;
 }
