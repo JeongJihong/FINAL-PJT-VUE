@@ -1,7 +1,38 @@
 <template>
   <header>
+
+
+    <div>
+      <router-link to="/"><img style="height:100px; width: 250px;" src="@/assets/img/hh.png" /></router-link>
+      <b-nav class="nav-nav">
+        <b-nav-item active @click.prevent="searchArticle">자유게시판</b-nav-item>
+        <b-nav-item active @click.prevent="searchQna">Q&A</b-nav-item>
+        <b-nav-item active>오늘의 뉴스</b-nav-item>
+        <b-nav-item active>주변 탐방</b-nav-item>
+        <b-nav-item active></b-nav-item>
+        
+
+        <template v-if="!loginState">
+          <b-nav-item active><router-link to="/mem/mvlogin">로그인</router-link></b-nav-item>
+          <b-nav-text>|</b-nav-text>
+          <b-nav-item active><router-link to="/mem/mvinsertmember">회원가입</router-link></b-nav-item>
+        </template>
+
+        <template v-if="loginState">
+          <b-nav-item active><button @click="logout">로그아웃</button></b-nav-item>
+          <b-nav-text>|</b-nav-text>
+          <b-nav-item active><router-link to="/mem/mvuserinfo">회원정보</router-link></b-nav-item>
+          <b-nav-text>|</b-nav-text>
+          <b-nav-item active><router-link to="/mem/delete">회원탈퇴</router-link></b-nav-item>
+        </template>
+
+        
+      </b-nav>
+    </div>
+
+
     <!-- 로그인 메뉴 -->
-    <div class="container-fluid navbar-dark bg-dark">
+    <!-- <div class="container-fluid navbar-dark bg-dark">
       <nav class="navbar navbar-expand-sm justify-content-end">
         <div v-if="!loginState">
           <div class="navbar-collapse">
@@ -29,10 +60,10 @@
           </div>
         </div>
       </nav>
-    </div>
+    </div> -->
 
     <!-- nav 메뉴 -->
-    <div class="container-fluid" style="height: 100 px">
+    <!-- <div class="container-fluid" style="height: 100 px">
       <nav class="navbar navbar-expand-sm">
         <router-link to="/" class="nav-link text-dark"
           ><i class="bi bi-house-fill" style="font-size: 40px"></i
@@ -40,7 +71,6 @@
 
         <div class="header_nav_menu navbar-collapse justify-content-end">
           <ul class="navbar-nav">
-            <!-- <li class="nav-item"><router-link to="/article/list" class="btn mr-2">공지 사항</router-link></li> -->
             <li class="nav-item">
               <button class="btn mr-2" @click.prevent="searchArticle">자유게시판</button>
             </li>
@@ -63,29 +93,14 @@
             </ul>
           </div>
 
-          <!-- <div class="nav-item">
+          <div class="nav-item">
                         <div class="form-inline">
                             <input type='text' v-model="searchText" class="form-control mr-sm-2" placeholder="아파트 이름">
                             <router-link to="search" class="btn btn-outline-secondary my-2 my-sm-0">Search</router-link>
                         </div>
-                    </div> -->
+                    </div>
         </div>
       </nav>
-    </div>
-
-    <!-- <div>
-      <router-link to="/"><img style="height:100px; width: 250px;" src="@/assets/img/hh.png" /></router-link>
-      <b-nav>
-        <b-nav-item active @click.prevent="searchArticle">자유게시판</b-nav-item>
-        <b-nav-item active @click.prevent="searchQna">Q&A</b-nav-item>
-        <b-nav-item active>오늘의 뉴스</b-nav-item>
-        <b-nav-item active>주변 탐방</b-nav-item>
-        <b-nav-item active></b-nav-item>
-        
-        <b-nav-item active><router-link to="/mem/mvlogin">로그인</router-link></b-nav-item>
-        <b-nav-text>|</b-nav-text>
-        <b-nav-item active><router-link to="/mem/mvinsertmember">회원가입</router-link></b-nav-item>
-      </b-nav>
     </div> -->
 
     <!-- header 타이틀 -->
@@ -145,8 +160,8 @@ img {
   width: 400px;
   height: 400px;
 }
-/* .nav {
+.nav-nav {
   font-size: 20px;
   float: right;
-} */
+}
 </style>
