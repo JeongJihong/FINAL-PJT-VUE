@@ -117,4 +117,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.btn{
+  margin: 5px;
+}
+</style>
