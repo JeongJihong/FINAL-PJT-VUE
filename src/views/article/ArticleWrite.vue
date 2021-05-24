@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       articleno: "",
-      id: this.$store.state.member.loginId,
+      id: this.$store.state.loginId,
       subject: "",
       content: "",
     };
@@ -51,7 +51,7 @@ export default {
     }),
 
     writeArticle() {
-      this.registerArticle({ subject: this.subject, content: this.content});
+      this.registerArticle({ id: this.id, subject: this.subject, content: this.content});
       this.$router.replace("/article");
     },
 

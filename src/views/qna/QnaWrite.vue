@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       qnano: "",
-      id: this.$store.state.member.loginId,
+      id: this.$store.state.loginId,
       subject: "",
       content: "",
       answer: "",
@@ -57,7 +57,7 @@ export default {
     }),
 
     writeQna() {
-      this.registerQna({ subject: this.subject, content: this.content, answer: this.answer });
+      this.registerQna({ id: this.id, subject: this.subject, content: this.content, answer: this.answer });
       this.$router.replace("/qna");
     },
 

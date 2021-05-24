@@ -24,7 +24,7 @@ export default new Vuex.Store({
     article: [],
 
     member: [],
-    loginId: '',
+    loginId: "",
     loginState: false,
   },
 
@@ -404,32 +404,6 @@ export default new Vuex.Store({
         });
     },
 
-    // getMemberList({ commit }) {
-    //   const addr = "http://localhost/mem/list";
-
-    //   axios
-    //     .get(addr)
-    //     .then((response) => {
-    //       console.log(response.data);
-    //       commit("GET_MEMBER_LIST", response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.dir(error);
-    //     });
-    // },
-
-    // getMember({ commit }, payload) {
-    //   axios
-    //     .get(payload)
-    //     .then((response) => {
-    //       console.log(response.data);
-    //       commit("GET_MEMBER", response.data);
-    //     })
-    //     .catch((error) => {
-    //       console.dir(error);
-    //     });
-    // },
-
     loginMember({ commit }, id) {
       commit("LOGIN_MEMBER", id);
     },
@@ -443,6 +417,21 @@ export default new Vuex.Store({
           commit("GET_MEMBER", member);
           console.log(response.data);
           // this.$router.replace("/");
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    modifyMember({ commit }, member) {
+      console.log(member);
+      const addr = "http://localhost/mem/update";
+
+      axios
+        .put(addr, member)
+        .then((response) => {
+          commit("GET_MEMBER", member);
+          console.log(response);
         })
         .catch((error) => {
           console.dir(error);
