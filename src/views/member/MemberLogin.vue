@@ -19,6 +19,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import axios from "axios";
 
 export default {
   data() {
@@ -35,8 +36,24 @@ export default {
     }),
 
     login() {
-      this.loginMember({ id:this.id, password:this.password});
-      this.$router.replace("/");
+      const addr = "http://localhost/mem/login";
+
+      axios
+        .post(addr, { id: this.id, password: this.password })
+        .then((response) => {
+          if (response.data.id !== "") {
+            // console.log(response.data);
+            this.loginMember(response.data.id);
+            this.$router.replace("/");
+          } else {
+            this.msg = response.data.msg;
+
+          }
+        })
+        .catch((error) => {
+          this.msg = response.data.msg;
+          console.dir(error);
+        });
     },
   },
 };

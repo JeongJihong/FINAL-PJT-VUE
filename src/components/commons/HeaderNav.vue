@@ -17,7 +17,7 @@
         </template>
 
         <template v-if="loginState">
-          <b-nav-item disabled>{{member.id}}님 안녕하세요</b-nav-item>
+          <b-nav-item disabled>{{ loginId }} 님 안녕하세요</b-nav-item>
           <b-nav-text>|</b-nav-text>
           <b-nav-item-dropdown
             id="my-nav-dropdown"
@@ -136,7 +136,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["loginState", "member"]),
+    ...mapGetters(["loginState", "loginId"]),
   },
 
   methods: {

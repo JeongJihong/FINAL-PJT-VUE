@@ -23,8 +23,8 @@ export default new Vuex.Store({
     articles: [],
     article: [],
 
-    members: [],
     member: [],
+    loginId: '',
     loginState: false,
   },
 
@@ -51,6 +51,10 @@ export default new Vuex.Store({
 
     member(state) {
       return state.member;
+    },
+
+    loginId(state) {
+      return state.loginId;
     },
 
     loginState(state) {
@@ -83,16 +87,6 @@ export default new Vuex.Store({
       state.dong = dong;
     },
 
-    GET_APT_LIST_BY_DONG(state, apts) {
-      // console.log(apts);
-      state.apts = apts;
-    },
-
-    GET_APT_LIST_BY_APT_NAME(state, apts) {
-      // console.log(apts);
-      state.apts = apts;
-    },
-
     GET_QNA_LIST(state, qnas) {
       state.qnas = qnas;
     },
@@ -122,7 +116,8 @@ export default new Vuex.Store({
       state.member = member;
     },
 
-    LOGIN_MEMBER(state) {
+    LOGIN_MEMBER(state, id) {
+      state.loginId = id;
       state.loginState = true;
     },
 
@@ -227,34 +222,6 @@ export default new Vuex.Store({
         .then((response) => {
           // console.log(response.data);
           commit("GET_DONG_LIST", response.data);
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
-    },
-
-    getAptListByDong({ commit }, text) {
-      const addr = "http://localhost/search/dong/";
-
-      axios
-        .get(addr + text)
-        .then((response) => {
-          // console.log(response.data);
-          commit("GET_APT_LIST_BY_DONG", response.data);
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
-    },
-
-    getAptListByAptName({ commit }, text) {
-      const addr = "http://localhost/search/aptname/";
-
-      axios
-        .get(addr + text)
-        .then((response) => {
-          // console.log(response.data);
-          commit("GET_APT_LIST_BY_APT_NAME", response.data);
         })
         .catch((error) => {
           console.dir(error);
@@ -463,23 +430,8 @@ export default new Vuex.Store({
     //     });
     // },
 
-    loginMember({ commit }, member) {
-      const addr = "http://localhost/mem/login";
-      axios
-        .post(addr, member)
-        .then((response) => {
-          if (response.data.id !== "") {
-            console.log(response.data);
-            commit("LOGIN_MEMBER");
-            // this.$router.replace("/");
-          } else {
-            this.msg = response.data.msg;
-          }
-        })
-        .catch((error) => {
-          this.msg = response.data.msg;
-          console.dir(error);
-        });
+    loginMember({ commit }, id) {
+      commit("LOGIN_MEMBER", id);
     },
 
     insertMember({ commit }, member) {
