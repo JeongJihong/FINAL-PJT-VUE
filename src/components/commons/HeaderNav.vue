@@ -1,7 +1,5 @@
 <template>
   <header>
-
-
     <div>
       <router-link to="/"><img style="height:100px; width: 250px;" src="@/assets/img/hh.png" /></router-link>
       <b-nav class="nav-nav">
@@ -19,7 +17,7 @@
         </template>
 
         <template v-if="loginState">
-          <b-nav-item disabled>{{this.$store.state.member.loginId}}님 안녕하세요</b-nav-item>
+          <b-nav-item disabled>{{member.id}}님 안녕하세요</b-nav-item>
           <b-nav-text>|</b-nav-text>
           <b-nav-item-dropdown
             id="my-nav-dropdown"
@@ -36,8 +34,6 @@
           <b-nav-text>|</b-nav-text>
           <b-nav-item active><router-link to="/mem/delete">회원탈퇴</router-link></b-nav-item> -->
         </template>
-
-        
       </b-nav>
     </div>
 
@@ -140,7 +136,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["loginState"]),
+    ...mapGetters(["loginState", "member"]),
   },
 
   methods: {

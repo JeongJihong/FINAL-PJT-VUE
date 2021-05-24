@@ -7,7 +7,7 @@
     <input type="text" class="inputLogin" v-model="id" placeholder="ID">
     <input type="text" class="inputLogin" v-model="password" placeholder="password">
     <input type="submit" class="loginBtn" value="로그인" @click="login">
-
+    <div v-if="msg != null" class="text-danger">{{msg}}</div>
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <router-link class="underlineHover" :to="'/mem/mvfindpassword'">비밀번호 찾기</router-link>
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapActions } from 'vuex'
 
 export default {
@@ -36,32 +35,10 @@ export default {
     }),
 
     login() {
-      const addr = "http://localhost/mem/login";
-      const params = {
-        id: this.id,
-        password: this.password
-      };
-
-      axios
-        .get(addr, {
-          params,
-        })
-        .then((response) => {
-          console.log(response.data.id);
-          if(response.data.id !== "") {
-            this.loginMember(response.data, { id: response.data.id });
-            this.$router.replace("/");
-          } else {
-            this.msg = response.data.msg;
-          }
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
+      this.loginMember({ id:this.id, password:this.password});
+      this.$router.replace("/");
     },
   },
-
-  
 };
 </script>
 

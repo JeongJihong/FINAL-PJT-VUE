@@ -22,11 +22,10 @@ export default new Vuex.Store({
 
     articles: [],
     article: [],
-    
-    member: {
-      loginState: false,
-      loginId: "",
-    },
+
+    members: [],
+    member: [],
+    loginState: false,
   },
 
   getters: {
@@ -46,8 +45,16 @@ export default new Vuex.Store({
       return state.article;
     },
 
+    memberData(state) {
+      return state.members;
+    },
+
+    member(state) {
+      return state.member;
+    },
+
     loginState(state) {
-      return state.member.loginState;
+      return state.loginState;
     },
   },
 
@@ -107,14 +114,20 @@ export default new Vuex.Store({
       state.article = article;
     },
 
-    LOGIN_MEMBER(state, member) {
-      state.member.loginId = member.id;
-      state.member.loginState = true;
+    GET_MEMBER_LIST(state, members) {
+      state.members = members;
+    },
+
+    GET_MEMBER(state, member) {
+      state.member = member;
+    },
+
+    LOGIN_MEMBER(state) {
+      state.loginState = true;
     },
 
     LOGOUT_MEMBER(state) {
-      state.member.loginId = "";
-      state.member.loginState = false;
+      state.loginState = false;
     },
   },
 
@@ -424,8 +437,64 @@ export default new Vuex.Store({
         });
     },
 
+    // getMemberList({ commit }) {
+    //   const addr = "http://localhost/mem/list";
+
+    //   axios
+    //     .get(addr)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       commit("GET_MEMBER_LIST", response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.dir(error);
+    //     });
+    // },
+
+    // getMember({ commit }, payload) {
+    //   axios
+    //     .get(payload)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       commit("GET_MEMBER", response.data);
+    //     })
+    //     .catch((error) => {
+    //       console.dir(error);
+    //     });
+    // },
+
     loginMember({ commit }, member) {
-      commit("LOGIN_MEMBER", member);
+      const addr = "http://localhost/mem/login";
+      axios
+        .post(addr, member)
+        .then((response) => {
+          if (response.data.id !== "") {
+            console.log(response.data);
+            commit("LOGIN_MEMBER");
+            // this.$router.replace("/");
+          } else {
+            this.msg = response.data.msg;
+          }
+        })
+        .catch((error) => {
+          this.msg = response.data.msg;
+          console.dir(error);
+        });
+    },
+
+    insertMember({ commit }, member) {
+      console.log(member);
+      const addr = "http://localhost/mem/insert";
+      axios
+        .post(addr, member)
+        .then((response) => {
+          commit("GET_MEMBER", member);
+          console.log(response.data);
+          // this.$router.replace("/");
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
     },
 
     logoutMember({ commit }) {

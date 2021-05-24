@@ -4,11 +4,6 @@
     <section id="main-contents" class="container-fluid">
       <!-- content -->
       <div class="row mb-2">
-        <!-- AD -->
-        <article class="col-sm-4">
-          <img src="@/assets/img/sideAD.jpg" class="img-thumbnail" alt="ad" />
-        </article>
-
         <!-- 회원 수정 -->
         <article class="col-sm-8">
           <!--회원수정 창-->
@@ -25,33 +20,31 @@
                     <td class="tbasic">아 이 디</td>
                     <td class="tbasic">
                       <!-- <input disabled type="text" name="id" id="id" value="${mem.id }" /> -->
-                      <input disabled type="text" name="id" id="id" :value="this.$store.state.member.loginId" />
+                      <input disabled type="text" name="id" id="id" :value="member.id" />
                     </td>
                   </tr>
                   <tr>
                     <td class="tbasic">비밀번호</td>
                     <td class="tbasic">
-                      <input type="password" name="password" id="password" value="ssafy" />
+                      <input type="password" name="password" id="password" :value="member.password" />
                     </td>
                   </tr>
                   <tr>
                     <td class="tbasic">이 &nbsp;름</td>
                     <td class="tbasic">
-                      <input v-if="this.$store.state.member.loginId==='ssafy'" type="text" name="name" id="name" value="이싸피" />
-                      <input v-if="this.$store.state.member.loginId==='admin'" type="text" name="name" id="name" value="관리자" />
+                      <input type="text" name="name" id="name" :value="member.name" />
                     </td>
                   </tr>
                   <tr>
                     <td class="tbasic">이메일</td>
                     <td class="tbasic">
-                      <input v-if="this.$store.state.member.loginId==='ssafy'" type="text" name="email" id="email" value="ssafy@ssafy.com" />
-                      <input v-if="this.$store.state.member.loginId==='admin'" type="text" name="email" id="email" value="admin@ssafy.com" />
+                      <input type="text" name="email" id="email" :value="member.email" />
                     </td>
                   </tr>
                   <tr>
                     <td class="tbasic">주 &nbsp;소</td>
                     <td class="tbasic">
-                      <input type="text" name="address" id="address" value="대전시 노은동" />
+                      <input type="text" name="address" id="address" :value="member.address" />
                     </td>
                   </tr>
                 </tbody>
@@ -75,17 +68,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(["loginState", "member"]),
+  },
+};
 </script>
 
 <style>
-#head {
-  width: 450px;
-}
-
-form {
-  margin: 0 auto;
-  padding: 20px;
-  width: 400px;
-  text-align: center;
-}
 </style>

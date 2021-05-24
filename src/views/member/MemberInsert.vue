@@ -9,11 +9,36 @@
     <input type="text" class="inputLogin" v-model="name" placeholder="name">
     <input type="text" class="inputLogin" v-model="email" placeholder="email">
     <input type="text" class="inputLogin" v-model="address" placeholder="address">
-    <input type="submit" class="loginBtn" value="가입">
+    <input type="submit" class="loginBtn" @click.prevent="registMember" value="가입">
   </div>
 </div>
 </template>
 
 <script>
-export default {};
+import { mapActions } from 'vuex'
+
+export default {
+  data() {
+    return {
+      address: "",
+      email: "",
+      id: "",
+      name: "",
+      password: "",
+      msg: "",
+    };
+  },
+
+  methods: {
+    ...mapActions({
+      insertMember: "insertMember",
+    }),
+
+    registMember() {
+      this.insertMember({ address: this.address, email: this.email, id:this.id, name:this.name, password:this.password});
+      alert("회원가입을 완료했습니다");
+      this.$router.replace("/");
+    },
+  },
+};
 </script>

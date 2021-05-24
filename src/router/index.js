@@ -38,6 +38,11 @@ const routes = [
     component: Member,
     redirect: "/mem/mvlogin",
     children: [
+      // {
+      //   path: "list",
+      //   name: "memlist",
+      //   component: MemberList,
+      // },
       {
         path: "mvlogin",
         name: "mvlogin",
