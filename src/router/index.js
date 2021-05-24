@@ -5,9 +5,8 @@ import Home from "../views/Home.vue";
 import Search from "../views/search/Search.vue";
 import Member from "../views/member/Member.vue";
 import MemberLogin from "../views/member/MemberLogin.vue";
-import MemberInsert from "../views/member/MemberInsert.vue";
+import MemberForm from "../views/member/MemberForm.vue";
 import MemberFindPassword from "../views/member/MemberFindPassword.vue";
-import MemberInfo from "../views/member/MemberInfo.vue";
 import Article from "../views/article/Article.vue";
 import ArticleList from "../views/article/ArticleList.vue";
 import ArticleModify from "../views/article/ArticleModify.vue";
@@ -51,7 +50,7 @@ const routes = [
       {
         path: "mvinsertmember",
         name: "mvinsertmember",
-        component: MemberInsert,
+        component: MemberForm,
       },
       {
         path: "mvfindpassword",
@@ -62,11 +61,6 @@ const routes = [
         path: "logout",
         name: "logout",
         component: Home,
-      },
-      {
-        path: "mvuserinfo",
-        name: "mvuserinfo",
-        component: MemberInfo,
       },
       {
         path: "delete",
