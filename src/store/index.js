@@ -118,6 +118,10 @@ export default new Vuex.Store({
       state.interest = interest;
     },
 
+    SEARCH_INTEREST(state, interest) {
+      state.interest = interest;
+    },
+
     GET_SIDO_LIST(state, sido) {
       state.sido = sido;
     },
@@ -235,7 +239,21 @@ export default new Vuex.Store({
           if (response.data.response.body.items === "") {
             commit("GET_HOUSE_LIST", []);
           } else {
-            commit("GET_HOUSE_LIST", response.data.response.body.items.item);
+            if (data.dong != "0") {
+              let items = response.data.response.body.items.item;
+              // console.log(items);
+              let list = [];
+              
+              for (let index in items) {
+                if (String(items[index].법정동).indexOf(data.dong) !== -1) {
+                  list.push(items[index]);
+                }
+              }
+              commit("GET_HOUSE_LIST", list);
+
+            } else {
+              commit("GET_HOUSE_LIST", response.data.response.body.items.item);
+            }
           }
         })
         .catch((error) => {
@@ -281,6 +299,10 @@ export default new Vuex.Store({
 
     deleteInterest({ commit }, data) {
       commit("DELETE_INTEREST", data);
+    },
+
+    searchInterest({ commit }, data) {
+      commit("SEARCH_INTEREST", data);
     },
 
     getSidoList({ commit }, data) {
