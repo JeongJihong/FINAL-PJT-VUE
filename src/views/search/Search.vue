@@ -103,7 +103,7 @@ export default {
 
       let datasets = [{
             label: label[0],
-            backgroundColor: 'rgba(28, 181, 224, 0.3)',
+            backgroundColor: 'rgba(28, 181, 224, 0.5)',
             data: shopAvgData,
           }];
       

@@ -1,7 +1,7 @@
 <template>
   <header>
     <div>
-      <router-link to="/"><img style="height:100px; width: 250px;" src="@/assets/img/hh.png" /></router-link>
+      <router-link to="/"><img style="height:75px; width: 200px;" src="@/assets/img/hh.png" /></router-link>
       <b-nav class="nav-nav">
         <b-nav-item active @click.prevent="searchArticle">자유게시판</b-nav-item>
         <b-nav-item active @click.prevent="searchQna">Q&A</b-nav-item>
@@ -164,8 +164,8 @@ export default {
 
 <style>
 img {
-  width: 400px;
-  height: 400px;
+  width: 250px;
+  height: 250px;
 }
 .nav-nav {
   font-size: 20px;

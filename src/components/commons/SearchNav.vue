@@ -75,8 +75,8 @@ export default {
 				date = [this.selectYear, this.selectMonth].join("")
 			}
 
-			this.getAptList({ "dong": this.selectGugun, "date": date });
-			this.getHouseList({ "dong": this.selectGugun, "date": date });
+			this.getAptList({ "gugun": this.selectGugun, "dong": this.selectDong, "date": date });
+			this.getHouseList({ "gugun": this.selectGugun, "dong": this.selectDong, "date": date });
 			this.getShopAvgData({ "gugun": this.selectGugun });
 			this.getShopData({ "gugun": this.selectGugun, "dong": this.selectDong });
 			if(this.$route.path !== "/search") this.$router.replace("/search");

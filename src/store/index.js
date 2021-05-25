@@ -164,7 +164,7 @@ export default new Vuex.Store({
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
 
       const params = {
-        LAWD_CD: data.dong,
+        LAWD_CD: data.gugun,
         DEAL_YMD: data.date,
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
@@ -193,7 +193,7 @@ export default new Vuex.Store({
       const SERVICE_KEY = process.env.VUE_APP_APT_DEAL_API_KEY;
 
       const params = {
-        LAWD_CD: data.dong,
+        LAWD_CD: data.gugun,
         DEAL_YMD: data.date,
         serviceKey: decodeURIComponent(SERVICE_KEY),
       };
