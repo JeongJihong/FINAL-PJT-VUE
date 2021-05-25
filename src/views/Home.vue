@@ -1,105 +1,112 @@
 <template>
-  <section id="main-contents" class="container-fluid">
-    <!-- content -->
-    <div class="row m-5">
-      <!-- AD -->
-      <article class="col-sm-4">
-        <img src="@/assets/img/sideAD.jpg" class="img-thumbnail" alt="ad" />
-      </article>
-
-      <!-- 추천 메뉴 -->
-      <article class="col-sm-4">
-        <h4>지혜롭게 내집 마련하기</h4>
-        <hr class="my-2" />
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link text-muted d-inline" href="#"
-              ><i class="bi bi-wallet2 mr-2"></i>가용자금 확인 및 대출 계획</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-muted d-inline" href="#"
-              ><i class="bi bi-house-door-fill mr-2"></i>집 증류 및 지역 선택</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-muted d-inline" href="#"
-              ><i class="bi bi-graph-up mr-2"></i>정보 수집 & 시세 파악</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-muted d-inline" href="#"
-              ><i class="bi bi-zoom-in mr-2"></i>부동산 방문 & 집 구경</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-muted d-inline" href="#"
-              ><i class="bi bi-pen mr-2"></i>계약 및 잔금 치르기</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-muted d-inline" href="#"
-              ><i class="bi bi-file-earmark-text mr-2"></i>소유권 이전 등기</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-muted d-inline" href="#"
-              ><i class="bi bi-gear-fill mr-2"></i>인테리어 공사</a
-            >
-          </li>
-        </ul>
-        <hr class="my-2" />
-      </article>
-
-      <!-- 뉴스 -->
-      <article class="col-sm-4">
-        <h4>오늘의 뉴스</h4>
-        <hr class="my-2" />
-        <h6>서울 아파트. 매매·전세 다른 양상...상승...아시아경제</h6>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link text-primary d-inline" href="#"
-              ><i class="bi bi-dot mr-1 text-muted"></i>서울 입주 2년차 아파트 전셋값 1억400만원
-              올라<span class="text-muted ml-1">한겨레</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-primary d-inline" href="#"
-              ><i class="bi bi-dot mr-1 text-muted"></i>12·16發 거래한파…매수자가 사라졌다<span
-                class="text-muted ml-1"
-                >아시아경제</span
-              ></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-primary d-inline" href="#"
-              ><i class="bi bi-dot mr-1 text-muted"></i>재건축 대안 뜨는 수직증축 리모델링...추진
-              속...<span class="text-muted ml-1">동아일보</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-primary d-inline" href="#"
-              ><i class="bi bi-dot mr-1 text-muted"></i>고가기준 9억,서울 아파트 중간값 됐다<span
-                class="text-muted ml-1"
-                >동아일보</span
-              ></a
-            >
-          </li>
-        </ul>
-      </article>
+  <div style="text-align:center">
+        <transition-group name="fade" tag="div" mode="in-out">
+            <div v-for="i in [currentIndex]" :key="i">
+                <img class="houseImg" :src="currentHouseImg"/>
+            </div>
+        </transition-group>
+        <a class="prev" @click="prev" href="#">❮</a>
+        <a class="next" @click="next" href="#">❯</a>
+    <br>
     </div>
-  </section>
 </template>
 
 <script>
-// import MapView from "../components/commons/MapView.vue";
 export default {
-  name: "Home",
+  data() {
+        return {
+            // 슬라이더 이미지 배열
+            houseImg : [
+              "https://www.gannett-cdn.com/presto/2019/10/17/USAT/5756be91-0cd0-4c2a-9091-aa1c6f5c0977-Press_HeroPhoto_01.jpg",
+              "https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg",
+              "https://static01.nyt.com/images/2019/06/25/realestate/25domestic-zeff/a1c1a1a36c9e4ff8adcb958c4276f28d-jumbo.jpg",
+              "https://static.dezeen.com/uploads/2020/06/royal-william-kaven-portland-oregon_dezeen_hero.jpg",
+            ],
+            // 타이머
+            timer : null,
+            // 현재 활성화된 인덱스
+            currentIndex : 0
+        }
+    },
+    // 마운트시 실행 함수
+    mounted() {
+        this.startSlide();
+    },
+    methods : {
+        // 슬라이드 시작
+        startSlide : function() {
+            this.timer = setInterval(this.next, 3000);
 
-  // components: {
-  //   MapView
-  // },
+        },
+        // 다음 슬라이드
+        next : function () {
+            this.currentIndex += 1;
+
+        },
+        // 이전 슬라이드
+        prev : function () {
+            this.currentIndex -= 1;
+        }
+    },
+    computed : {
+        // 활성화된 이미지 주소
+        currentHouseImg : function() {
+            return this.houseImg[Math.abs(this.currentIndex) % this.houseImg.length];
+        }
+    }
 };
 </script>
 
-<style></style>
+<style>
+
+/* .slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+{
+  transform: translateX(10px);
+  opacity: 0;
+} */
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: all .5s ease;
+    opacity: 1;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+.fade-leave-to {
+    display:none;
+}
+.houseImg {
+    width:2300px;
+    height:1500px;
+}
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top : -25px;
+    padding: 0 10px;
+    color: white;
+    line-height:50px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.7s ease;
+    border-radius: 0 4px 4px 0;
+    text-decoration: none;
+    user-select: none;
+}
+.next {
+    right: 0;
+}
+.prev {
+    left: 0;
+}
+</style>
