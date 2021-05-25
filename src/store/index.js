@@ -110,6 +110,14 @@ export default new Vuex.Store({
       }
     },
 
+    INSERT_INTEREST(state, interest) {
+      state.interest = interest;
+    },
+
+    DELETE_INTEREST(state, interest) {
+      state.interest = interest;
+    },
+
     GET_SIDO_LIST(state, sido) {
       state.sido = sido;
     },
@@ -151,10 +159,14 @@ export default new Vuex.Store({
       state.loginId = member.id;
       state.loginState = true;
       state.member = member;
+      state.interest = [];
     },
 
     LOGOUT_MEMBER(state) {
+      state.loginId = "";
       state.loginState = false;
+      state.member = [];
+      state.interest = [];
     },
   },
 
@@ -263,19 +275,16 @@ export default new Vuex.Store({
         });
     },
 
+    insertInterest({ commit }, data) {
+      commit("INSERT_INTEREST", data);
+    },
+
+    deleteInterest({ commit }, data) {
+      commit("DELETE_INTEREST", data);
+    },
+
     getSidoList({ commit }, data) {
       commit("GET_SIDO_LIST", data);
-      // const addr = 'http://localhost/map/sido';
-
-      // axios
-      //   .get(addr)
-      //   .then((response) => {
-      //       // console.log(response.data);
-      //       commit('GET_SIDO_LIST', response.data);
-      //   })
-      //   .catch((error) => {
-      //       console.dir(error);
-      //   });
     },
 
     getGugunList({ commit }, code) {

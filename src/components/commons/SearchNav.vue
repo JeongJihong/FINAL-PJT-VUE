@@ -22,18 +22,18 @@
 					<div class="text-white mr-2">월 <select class="btn btn-light p-1" v-model="selectMonth">
 						<option v-for="index in 12" :key="index" :value="index">{{ index + " 월" }}</option>
 					</select></div>
-					<button v-if="loginState" class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="insertInterest">관심지역등록</button>
+					<button v-if="loginState" class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="addInterest">관심지역등록</button>
 					<button class="btn btn-outline-light rounded ml-2 mr-5 pt-1 pb-1" @click.prevent="searchAptList()">Search</button>
 
 					<div v-if="loginState">
 						<div class="btn-group">
-							<div class="text-white mr-2">관심지역 <select class="btn btn-light p-1">
+							<div class="text-white mr-2">관심지역 <select class="btn btn-light p-1" v-model="selectInterest">
 								<option value="0" class="text-dark">선택</option>
-								<option v-for="(gugun, index) in guguns" :key="index" :value=gugun.gugun_code>{{ gugun.gugun_name }}</option>
+								<option v-for="(data, index) in interest" :key="index" :value=data.dong>{{ String(data.dong).split(" ")[1] }}</option>
 							</select></div>
 						</div>
 						<button class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="searchAptListByInterest">Search</button>
-						<button class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="deleteInterest">관심지역삭제</button>
+						<button class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="removeInterest">관심지역삭제</button>
 					</div>
 				</div>
 			</div>
@@ -68,6 +68,8 @@ export default {
 			getAptListByDong: "getAptListByDong",
 			getShopData: "getShopData",
 			getShopAvgData: "getShopAvgData",
+			insertInterest: "insertInterest",
+			deleteInterest: "deleteInterest",
 		}),
 
 		searchAptList() {
@@ -85,12 +87,44 @@ export default {
 			if(this.$route.path !== "/search") this.$router.replace("/search");
 		},
 
-		insertInterest() {
-			
+		addInterest() {
+			if(this.selectGugun === "0" || this.selectDong === "0") return;
+			const addr = 'http://localhost/map/interest';
+			let data = { id: this.loginId, dong: this.selectGugun + " " + this.selectDong };
+
+			console.log(data);
+
+			axios
+			.post(addr, data)
+			.then((response) => {
+				// console.log(response.data);
+				this.insertInterest(response.data);
+			})
+			.catch((error) => {
+				console.dir(error);
+			});
 		},
 
-		deleteInterest() {
+		removeInterest() {
+			if(this.selectInterest === "0") return;
+			const addr = 'http://localhost/map/interest';
+			let data = { id: this.loginId, dong: this.selectInterest };
+			
+			console.log(data);
 
+			axios
+			.delete(addr, {
+				data: data
+			})
+			.then((response) => {
+				// console.log(response.data);
+				this.deleteInterest(response.data);
+			})
+			.catch((error) => {
+				console.dir(error);
+			});
+
+			this.selectInterest = "0";
 		},
 
 		searchAptListByInterest() {
@@ -101,14 +135,22 @@ export default {
 				date = [this.selectYear, this.selectMonth].join("")
 			}
 
-			
+			const word = String(this.selectInterest).split(" ");
+			const gugun = word[0];
+			const dong = word[1];
+			console.log(word);
+
+			this.getAptList({ "gugun": gugun, "dong": dong, "date": date });
+			this.getHouseList({ "gugun": gugun, "dong": dong, "date": date });
+			this.getShopAvgData({ "gugun": gugun });
+			this.getShopData({ "gugun": gugun, "dong": dong });
 
 			if(this.$route.path !== "/search") this.$router.replace("/search");
 		},
 	},
     
 	computed: {
-		...mapGetters(["loginState"]),
+		...mapGetters(["loginState", "loginId"]),
 
 		sidos() {
 			return this.$store.state.sido;
@@ -120,6 +162,10 @@ export default {
 
 		dongs() {
 			return this.$store.state.dong;
+		},
+
+		interest() {
+			return this.$store.state.interest;
 		},
 	},
 
