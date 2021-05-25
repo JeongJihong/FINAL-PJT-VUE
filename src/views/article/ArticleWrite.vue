@@ -40,7 +40,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["loginState"]),
+    ...mapGetters(["loginState", "loginId"]),
   },
 
   methods: {
@@ -57,6 +57,7 @@ export default {
 
     updateArticle() {
       this.modifyArticle({
+        id: this.id,
         articleno: this.articleno,
         subject: this.subject,
         content: this.content,
@@ -74,6 +75,10 @@ export default {
         this.articleno = data.articleno;
         this.subject = data.subject;
         this.content = data.content;
+        if(data.userId != this.$store.state.loginId) {
+          alert("본인만 수정 가능합니다!");
+          this.$router.replace("/article");
+        }
       });
     }
   },

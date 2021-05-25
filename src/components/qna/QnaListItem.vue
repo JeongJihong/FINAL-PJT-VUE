@@ -80,7 +80,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["qna"]),
+    ...mapGetters(["qna", "loginId"]),
   },
   created() {
     this.no = this.$route.params.no;
@@ -93,7 +93,13 @@ export default {
     }),
 
     removeQna() {
-      if (confirm("정말로 삭제하시겠습니까?")) {
+      if(this.qna.id != this.loginId) {
+        alert("본인만 삭제 가능합니다!");
+        this.$router.replace("/qna");
+      }
+
+      else {
+        if (confirm("정말로 삭제하시겠습니까?")) {
         axios.delete(`http://localhost/qna/${this.no}`).then(({ data }) => {
           let msg = "삭제 처리시 문제가 발생했습니다.";
           if (data === "success") {
@@ -102,6 +108,7 @@ export default {
           alert(msg);
           this.$router.push("/qna");
         });
+      }
       }
     },
 

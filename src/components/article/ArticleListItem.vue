@@ -69,12 +69,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["article"]),
+    ...mapGetters(["article", "loginId"]),
   },
   created() {
     this.no = this.$route.params.no;
     // 도서 정보 얻기.
     this.$store.dispatch("getArticle", `http://localhost/article/${this.no}`);
+
   },
   methods: {
     ...mapActions({
@@ -88,7 +89,13 @@ export default {
     // },
 
     removeArticle() {
-      if (confirm("정말로 삭제하시겠습니까?")) {
+      if(this.article.userId != this.loginId) {
+        alert("본인만 삭제 가능합니다!");
+        this.$router.replace("/article");
+      }
+
+      else {
+        if (confirm("정말로 삭제하시겠습니까?")) {
         axios.delete(`http://localhost/article/${this.no}`).then(({ data }) => {
           let msg = "삭제 처리시 문제가 발생했습니다.";
           if (data === "success") {
@@ -97,6 +104,7 @@ export default {
           alert(msg);
           this.$router.push("/article");
         });
+      }
       }
     },
   },

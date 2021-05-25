@@ -78,6 +78,10 @@ export default {
     }
     if (this.type === "modify") {
       axios.get(`http://localhost/qna/${this.$route.params.no}`).then(({ data }) => {
+        if(data.id != this.$store.state.loginId) {
+          alert("본인만 수정 가능합니다!");
+          this.$router.replace("/qna");
+        }
         this.qnano = data.qnano;
         this.subject = data.subject;
         this.content = data.content;
