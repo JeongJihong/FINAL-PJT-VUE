@@ -64,6 +64,7 @@ export default {
 			getHouseList: "getHouseList",
 			getAptListByDong: "getAptListByDong",
 			getShopData: "getShopData",
+			getShopAvgData: "getShopAvgData",
 		}),
 
 		searchAptList() {
@@ -76,7 +77,8 @@ export default {
 
 			this.getAptList({ "dong": this.selectGugun, "date": date });
 			this.getHouseList({ "dong": this.selectGugun, "date": date });
-			this.getShopData({ "gugun": this.selectGugun });
+			this.getShopAvgData({ "gugun": this.selectGugun });
+			this.getShopData({ "gugun": this.selectGugun, "dong": this.selectDong });
 			if(this.$route.path !== "/search") this.$router.replace("/search");
 		},
 

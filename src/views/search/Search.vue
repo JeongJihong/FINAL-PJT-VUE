@@ -2,11 +2,19 @@
   <section class="container">
     <!-- <map-view /> -->
     <!-- 상권 정보 요약 -->
-    <div>{{ gugun }}</div>
-    <div class="chart mx-auto">
-      <search-shop :chart-data="datacollection"></search-shop>
-    </div>
-    <div class="m-5"></div>
+    <b-row class="mx-auto">
+      <div class="data d-inline-block m-3">
+        <search-shop :chart-data="datacollection"></search-shop>
+      </div>
+      <div v-if="shopAvg.length > 0" class="d-inline-block m-4">
+        <h3 class="font-weight-bold text-center m-4">{{ gugun }} 평균</h3>
+        <h5 v-for="(item, index) in shopAvg" class="m-3" :key="index">{{ item.type }} : {{ parseInt(item.count) }}</h5>
+      </div>
+      <div v-if="shop.length > 0" class="d-inline-block m-4">
+        <h3 class="font-weight-bold text-center m-4">{{ dong }}</h3>
+        <h5 v-for="(item, index) in shop" class="m-3" :key="index">{{ item.type }} : {{ parseInt(item.count) }}</h5>
+      </div>
+    </b-row>
     <!-- 아파트 검색 정보-->
     <search-apt></search-apt>
     <div class="m-5"></div>
@@ -32,6 +40,18 @@ export default {
       this.fillData();
       return this.$store.state.currentGugun;
     },
+
+    dong() {
+      return this.$store.state.currentDong;
+    },
+
+    shop() {
+      return this.$store.state.shop;
+    },
+
+    shopAvg() {
+      return this.$store.state.shopAvg;
+    },
   },
 
   mounted () {
@@ -40,10 +60,29 @@ export default {
 
   methods: {
     fillData () {
-      let label = this.$store.state.currentGugun;
+      let label = [this.$store.state.currentGugun, this.$store.state.currentDong];
       let labels = ["관광/여가/오락", "부동산", "생활서비스", "소매", "숙박", "음식", "학문/교육"];
+      let shopAvg = this.$store.state.shopAvg;
       let shop = this.$store.state.shop;
-      let data = [];
+      let shopAvgData = [];
+      let shopData = [];
+
+      for(let i in labels) {
+        let flag = false;
+
+        for(let j in shopAvg) {
+          // console.log(shop[j].type);
+
+          if(labels[i] === shopAvg[j].type) {
+            // console.log(shop[y]);
+            shopAvgData.push(shopAvg[j].count);
+            flag = true;
+          }
+        }
+        if(!flag) {
+          shopAvgData.push(0);
+        }
+      }
 
       for(let i in labels) {
         let flag = false;
@@ -53,24 +92,32 @@ export default {
 
           if(labels[i] === shop[j].type) {
             // console.log(shop[y]);
-            data.push(shop[j].count);
+            shopData.push(shop[j].count);
             flag = true;
           }
         }
         if(!flag) {
-          data.push(0);
+          shopData.push(0);
         }
+      }
+
+      let datasets = [{
+            label: label[0],
+            backgroundColor: 'rgba(28, 181, 224, 0.3)',
+            data: shopAvgData,
+          }];
+      
+      if(shop.length > 0) {
+        datasets.push({
+          label: label[1],
+          backgroundColor: 'rgba(181, 28, 128, 0.7)',
+          data: shopData,
+        });
       }
 
       this.datacollection = {
         labels: labels,
-        datasets: [
-          {
-            label: label,
-            backgroundColor: 'rgba(28, 181, 224, 0.7)',
-            data: data,
-          },
-        ]
+        datasets: datasets,
       }
     },
   },
@@ -86,6 +133,9 @@ export default {
 
 <style>
   .chart {
-    max-width:400px;
+    min-height: 400px;
+    max-height: 400px;
+    min-width: 400px;
+    max-width: 400px;
   }
 </style>

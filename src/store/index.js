@@ -17,6 +17,7 @@ export default new Vuex.Store({
     houses: [],
     housesLength: 0,
     shop: [],
+    shopAvg: [],
 
     sido: [],
     gugun: [],
@@ -90,14 +91,22 @@ export default new Vuex.Store({
 
     GET_SHOP_DATA(state, data) {
       if (data.length > 0) {
-        state.currentGugun = data[0].gugun;
-        state.currentDong = data[0].dong === null ? "" : data[0].dong;
+        state.currentDong = data[0].dong;
+        state.shop = data;
       } else {
-        state.currentGugun = "없음";
-        state.currentDong = "없음";
+        state.currentDong = '';
+        state.shop = [];
       }
-      
-      state.shop = data;
+    },
+
+    GET_SHOP_AVG_DATA(state, data) {
+      if (data.length > 0) {
+        state.currentGugun = data[0].gugun;
+        state.shopAvg = data;
+      } else {
+        state.currentGugun = '';
+        state.shopAvg = [];
+      }
     },
 
     GET_SIDO_LIST(state, sido) {
@@ -208,7 +217,7 @@ export default new Vuex.Store({
     },
 
     getShopData({ commit }, data) {
-      const addr = "http://localhost/shop/avg/";
+      const addr = "http://localhost/shop/data";
 
       axios
         .get(addr, {
@@ -217,6 +226,22 @@ export default new Vuex.Store({
         .then((response) => {
           // console.log(response.data);
           commit("GET_SHOP_DATA", response.data);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    getShopAvgData({ commit }, data) {
+      const addr = "http://localhost/shop/avg";
+
+      axios
+        .get(addr, {
+          params: data,
+        })
+        .then((response) => {
+          // console.log(response.data);
+          commit("GET_SHOP_AVG_DATA", response.data);
         })
         .catch((error) => {
           console.dir(error);
