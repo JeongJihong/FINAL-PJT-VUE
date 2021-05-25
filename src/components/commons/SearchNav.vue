@@ -22,18 +22,20 @@
 					<div class="text-white mr-2">월 <select class="btn btn-light p-1" v-model="selectMonth">
 						<option v-for="index in 12" :key="index" :value="index">{{ index + " 월" }}</option>
 					</select></div>
-					
-					<!-- <button id="insert_interest_btn" class="btn btn-outline-light ml-2 mr-5 pt-0 pb-0">관심지역등록</button>
-				
-					<div class="btn-group">
-						<div class="text-white mr-2">관심지역 <select id="interest" name="interest" class="btn btn-light p-0">
-							<option value="0" class="text-dark">선택</option>
-						</select></div>
+					<button v-if="loginState" class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="insertInterest">관심지역등록</button>
+					<button class="btn btn-outline-light rounded ml-2 mr-5 pt-1 pb-1" @click.prevent="searchAptList()">Search</button>
+
+					<div v-if="loginState">
+						<div class="btn-group">
+							<div class="text-white mr-2">관심지역 <select class="btn btn-light p-1">
+								<option value="0" class="text-dark">선택</option>
+								<option v-for="(gugun, index) in guguns" :key="index" :value=gugun.gugun_code>{{ gugun.gugun_name }}</option>
+							</select></div>
+						</div>
+						<button class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="searchAptListByInterest">Search</button>
+						<button class="btn btn-outline-light rounded ml-2 mr-1 pt-1 pb-1" @click.prevent="deleteInterest">관심지역삭제</button>
 					</div>
-					<button type="submit" class="btn btn-outline-light ml-2 mr-2 pt-0 pb-0">Search</button>
-					<button type="button" id="delete_interest_btn" class="btn btn-outline-light ml-2 pt-0 pb-0">관심지역삭제</button> -->
 				</div>
-				<button class="btn btn-outline-light ml-2 mr-2 pt-1 pb-1" @click.prevent="searchAptList()">Search</button>
 			</div>
 		</div>
 	</section>
@@ -41,7 +43,7 @@
 
 <script>
 import axios from 'axios';
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
     name: 'SearchNav',
 
@@ -51,6 +53,7 @@ export default {
 			selectGugun: '0',
 			selectDong: '0',
 			selectYear: '2021',
+			selectInterest: '0',
 			selectMonth: '1',
         };
     },
@@ -82,14 +85,31 @@ export default {
 			if(this.$route.path !== "/search") this.$router.replace("/search");
 		},
 
-		searchByDong() {
-			// console.log(this.selectGugun + "|" + this.selectDong);
-			this.getAptListByDong(this.selectDong);
+		insertInterest() {
+			
+		},
+
+		deleteInterest() {
+
+		},
+
+		searchAptListByInterest() {
+			let date = "";
+			if(this.selectMonth < 10) {
+				date = [this.selectYear, 0, this.selectMonth].join("")
+			} else {
+				date = [this.selectYear, this.selectMonth].join("")
+			}
+
+			
+
 			if(this.$route.path !== "/search") this.$router.replace("/search");
 		},
 	},
     
 	computed: {
+		...mapGetters(["loginState"]),
+
 		sidos() {
 			return this.$store.state.sido;
 		},

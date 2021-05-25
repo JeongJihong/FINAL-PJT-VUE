@@ -22,6 +22,7 @@ export default new Vuex.Store({
     sido: [],
     gugun: [],
     dong: [],
+    interest: [],
 
     qnas: [],
     qna: [],
@@ -179,7 +180,21 @@ export default new Vuex.Store({
           if (response.data.response.body.items === "") {
             commit("GET_APT_LIST", []);
           } else {
-            commit("GET_APT_LIST", response.data.response.body.items.item);
+            if (data.dong != "0") {
+              let items = response.data.response.body.items.item;
+              // console.log(items);
+              let list = [];
+              
+              for (let index in items) {
+                if (String(items[index].법정동).indexOf(data.dong) !== -1) {
+                  list.push(items[index]);
+                }
+              }
+              commit("GET_APT_LIST", list);
+
+            } else {
+              commit("GET_APT_LIST", response.data.response.body.items.item);
+            }
           }
         })
         .catch((error) => {
