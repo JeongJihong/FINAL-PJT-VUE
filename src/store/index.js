@@ -133,17 +133,14 @@ export default new Vuex.Store({
       state.article = article;
     },
 
-    GET_MEMBER_LIST(state, members) {
-      state.members = members;
-    },
-
     GET_MEMBER(state, member) {
       state.member = member;
     },
 
-    LOGIN_MEMBER(state, id) {
-      state.loginId = id;
+    LOGIN_MEMBER(state, member) {
+      state.loginId = member.id;
       state.loginState = true;
+      state.member = member;
     },
 
     LOGOUT_MEMBER(state) {
@@ -445,8 +442,8 @@ export default new Vuex.Store({
         });
     },
 
-    loginMember({ commit }, id) {
-      commit("LOGIN_MEMBER", id);
+    loginMember({ commit }, member) {
+      commit("LOGIN_MEMBER", member);
     },
 
     insertMember({ commit }, member) {

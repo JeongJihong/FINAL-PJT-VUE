@@ -43,7 +43,7 @@ export default {
         .then((response) => {
           if (response.data.id !== "") {
             // console.log(response.data);
-            this.loginMember(response.data.id);
+            this.loginMember(response.data);
             this.$router.replace("/");
           } else {
             this.msg = response.data.msg;
