@@ -58,7 +58,6 @@ export default {
     return {
       option: "articleno",
       searchText: "",
-      pageArray: [],
     };
   },
 
