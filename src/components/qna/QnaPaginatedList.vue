@@ -117,4 +117,7 @@ table tr td {
 .btn-cover .page-count {
   padding: 0 1rem;
 }
+th {
+  background-color: #F5F5F5;
+}
 </style>
