@@ -19,6 +19,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import axios from "axios";
 
 export default {
   data() {
@@ -43,9 +44,26 @@ export default {
     }),
 
     registMember() {
-      this.insertMember({ address: this.address, email: this.email, id:this.id, name:this.name, password:this.password});
-      alert("회원가입을 완료했습니다");
-      this.$router.replace("/");
+      // console.log(member);
+      const addr = "http://localhost/mem/insert";
+      axios
+        .post(addr, { address: this.address, email: this.email, id:this.id, name:this.name, password:this.password})
+        .then((response) => {
+          console.log(response.data.msg)
+          if(response.data.msg === "") {
+            this.insertMember(response.data);
+            alert("회원가입을 완료했습니다");
+            this.$router.replace("/");
+          } else {
+            alert(response.data.msg);
+          }
+
+          // console.log(response.data);
+          // this.$router.replace("/");
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
     },
 
     changeMember() {

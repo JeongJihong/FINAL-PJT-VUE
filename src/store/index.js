@@ -447,18 +447,7 @@ export default new Vuex.Store({
     },
 
     insertMember({ commit }, member) {
-      console.log(member);
-      const addr = "http://localhost/mem/insert";
-      axios
-        .post(addr, member)
-        .then((response) => {
-          commit("GET_MEMBER", member);
-          console.log(response.data);
-          // this.$router.replace("/");
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
+      commit("GET_MEMBER", member);
     },
 
     modifyMember({ commit }, member) {
