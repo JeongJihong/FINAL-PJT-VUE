@@ -451,14 +451,14 @@ export default new Vuex.Store({
     },
 
     modifyMember({ commit }, member) {
-      console.log(member);
+      // console.log(member);
       const addr = "http://localhost/mem/update";
 
       axios
         .put(addr, member)
         .then((response) => {
           commit("GET_MEMBER", member);
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
           console.dir(error);
