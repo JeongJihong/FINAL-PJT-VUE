@@ -19,6 +19,7 @@
               class="form-control"
               placeholder="검색어를 입력해 주세요"
               v-model="searchText"
+              @keyup.enter="searchQnaByOption"
             />
           </td>
           <td>
@@ -76,11 +77,13 @@ export default {
     searchQnaByOption() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.searchQnaList({ key: this.option, word: this.searchText });
+      this.$router.go();
     },
 
     searchQna() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.getQnaList();
+      this.$router.go(this.$router.currentRoute);
     },
   },
 

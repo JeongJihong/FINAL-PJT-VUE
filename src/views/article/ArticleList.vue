@@ -19,6 +19,7 @@
               class="form-control"
               placeholder="검색어를 입력해 주세요"
               v-model="searchText"
+              @keyup.enter="searchArticleByOption"
             />
           </td>
           <td>
@@ -76,13 +77,13 @@ export default {
     searchArticleByOption() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.searchArticleList({ key: this.option, word: this.searchText });
-      // this.$router.replace("/article");
+      this.$router.go();
     },
 
     searchArticle() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.getArticleList();
-      // this.$router.replace("/article");
+      this.$router.go();
     },
   },
 
