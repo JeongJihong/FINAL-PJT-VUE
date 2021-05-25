@@ -171,4 +171,20 @@ img {
   font-size: 20px;
   float: right;
 }
+
+.nav-nav a:link {
+  color: #696969;
+}
+
+.nav-nav  a:visited {
+  color: #696969;
+} 
+
+.nav-nav a:active {
+  color: #696969;
+}
+
+.nav-nav a:hover {
+  color: goldenrod;
+}
 </style>

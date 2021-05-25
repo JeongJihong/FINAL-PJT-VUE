@@ -119,4 +119,20 @@ table tr td {
 .btn-cover .page-count {
   padding: 0 1rem;
 }
+th {
+  background-color: #F5F5F5;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+} 
+
+a:active {
+  color: black;
+}
+
 </style>

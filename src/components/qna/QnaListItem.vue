@@ -148,4 +148,7 @@ button.small {
   font-size: small;
   font-weight: bold;
 }
+th {
+  background-color: #F5F5F5;
+}
 </style>

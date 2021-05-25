@@ -9,8 +9,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentGugun: '',
-    currentDong: '',
+    currentGugun: "",
+    currentDong: "",
 
     apts: [],
     aptsLength: 0,
@@ -66,7 +66,7 @@ export default new Vuex.Store({
     loginState(state) {
       return state.loginState;
     },
-    
+
     currentGugun(state) {
       return state.currentGugun;
     },
@@ -94,7 +94,7 @@ export default new Vuex.Store({
         state.currentDong = data[0].dong;
         state.shop = data;
       } else {
-        state.currentDong = '';
+        state.currentDong = "";
         state.shop = [];
       }
     },
@@ -104,7 +104,7 @@ export default new Vuex.Store({
         state.currentGugun = data[0].gugun;
         state.shopAvg = data;
       } else {
-        state.currentGugun = '';
+        state.currentGugun = "";
         state.shopAvg = [];
       }
     },

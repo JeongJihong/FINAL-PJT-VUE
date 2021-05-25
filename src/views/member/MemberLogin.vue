@@ -5,7 +5,7 @@
     <br>
     <h1>로그인</h1>
     <input type="text" class="inputLogin" v-model="id" placeholder="ID">
-    <input type="text" class="inputLogin" v-model="password" placeholder="password">
+    <input type="password" class="inputLogin" v-model="password" placeholder="password">
     <input type="submit" class="loginBtn" value="로그인" @click="login">
     <div v-if="msg != null" class="text-danger">{{msg}}</div>
     <!-- Remind Passowrd -->

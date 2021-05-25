@@ -76,11 +76,13 @@ export default {
     searchArticleByOption() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.searchArticleList({ key: this.option, word: this.searchText });
+      // this.$router.replace("/article");
     },
 
     searchArticle() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.getArticleList();
+      // this.$router.replace("/article");
     },
   },
 
