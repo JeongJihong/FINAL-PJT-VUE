@@ -9,10 +9,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    currentGugun: '',
+    currentDong: '',
+
     apts: [],
     aptsLength: 0,
     houses: [],
     housesLength: 0,
+    shop: [],
+
     sido: [],
     gugun: [],
     dong: [],
@@ -60,6 +65,14 @@ export default new Vuex.Store({
     loginState(state) {
       return state.loginState;
     },
+    
+    currentGugun(state) {
+      return state.currentGugun;
+    },
+
+    currentDong(state) {
+      return state.currentDong;
+    },
   },
 
   mutations: {
@@ -73,6 +86,18 @@ export default new Vuex.Store({
       // console.log(state, apts);
       state.houses = houses;
       state.housesLength = houses.length;
+    },
+
+    GET_SHOP_DATA(state, data) {
+      if (data.length > 0) {
+        state.currentGugun = data[0].gugun;
+        state.currentDong = data[0].dong === null ? "" : data[0].dong;
+      } else {
+        state.currentGugun = "없음";
+        state.currentDong = "없음";
+      }
+      
+      state.shop = data;
     },
 
     GET_SIDO_LIST(state, sido) {
@@ -179,6 +204,22 @@ export default new Vuex.Store({
           } else {
             commit("GET_HOUSE_LIST", response.data.response.body.items.item);
           }
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
+
+    getShopData({ commit }, data) {
+      const addr = "http://localhost/shop/avg/";
+
+      axios
+        .get(addr, {
+          params: data,
+        })
+        .then((response) => {
+          // console.log(response.data);
+          commit("GET_SHOP_DATA", response.data);
         })
         .catch((error) => {
           console.dir(error);
