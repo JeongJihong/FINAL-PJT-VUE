@@ -5,8 +5,7 @@
       <b-nav class="nav-nav">
         <b-nav-item active @click.prevent="searchArticle">자유게시판</b-nav-item>
         <b-nav-item active @click.prevent="searchQna">Q&A</b-nav-item>
-        <b-nav-item active>오늘의 뉴스</b-nav-item>
-        <b-nav-item active>주변 탐방</b-nav-item>
+        <b-nav-item><router-link v-if="loginState" to="/statistics" active>관심지역 비교분석</router-link></b-nav-item>
         <b-nav-item active></b-nav-item>
         
 

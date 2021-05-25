@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align:center">
+  <div class="houseImg" style="text-align:center">
         <transition-group name="fade" tag="div" mode="in-out">
             <div v-for="i in [currentIndex]" :key="i">
                 <img class="houseImg" :src="currentHouseImg"/>
@@ -8,7 +8,7 @@
         <a class="prev" @click="prev" href="#">❮</a>
         <a class="next" @click="next" href="#">❯</a>
     <br>
-    </div>
+  </div>
 </template>
 
 <script>

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 import Home from "../views/Home.vue";
 import Search from "../views/search/Search.vue";
+import Statistics from "../views/statistics/statistics.vue";
 import Member from "../views/member/Member.vue";
 import MemberLogin from "../views/member/MemberLogin.vue";
 import MemberForm from "../views/member/MemberForm.vue";
@@ -30,6 +31,11 @@ const routes = [
     path: "/search",
     name: "search",
     component: Search,
+  },
+  {
+    path: "/statistics",
+    name: "statistics",
+    component: Statistics,
   },
   {
     path: "/mem",
