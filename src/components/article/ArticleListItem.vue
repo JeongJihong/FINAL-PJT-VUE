@@ -104,6 +104,6 @@ export default {
 </script>
 <style >
 th {
-  background-color: #d8d0d0;
+  background-color: #F5F5F5;
 }
 </style>
