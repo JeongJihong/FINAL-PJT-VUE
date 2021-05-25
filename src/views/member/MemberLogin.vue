@@ -33,20 +33,33 @@ export default {
   methods: {
     ...mapActions({
       loginMember: "loginMember",
+      searchInterest: "searchInterest",
     }),
 
     login() {
-      const addr = "http://localhost/mem/login";
+      const addr1 = "http://localhost/mem/login";
+      const addr2 = "http://localhost/map/interest/";
 
       axios
-        .post(addr, { id: this.id, password: this.password })
-        .then((response) => {
-          if (response.data.id !== "") {
-            // console.log(response.data);
-            this.loginMember(response.data);
+        .post(addr1, { id: this.id, password: this.password })
+        .then((response1) => {
+          if (response1.data.id !== "") {
+            // console.log(response1.data);
+            this.loginMember(response1.data);
+
+            axios
+              .get(addr2 + this.id)
+              .then((response2) => {
+                this.searchInterest(response2.data);
+              })
+              .catch((error) => {
+                this.msg = response2.data.msg;
+                console.dir(error);
+              });
+
             this.$router.replace("/");
           } else {
-            this.msg = response.data.msg;
+            this.msg = response1.data.msg;
 
           }
         })
