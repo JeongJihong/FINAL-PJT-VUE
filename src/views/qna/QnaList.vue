@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="col-lg-8 container-fluid table table-bordered table-condensed" align="center">
+    <div class="col-lg-8 container-fluid table-condensed" align="center">
       <br>
       <h2>Q&A</h2>
-      <router-link to="/qna/create" class="btn btn-secondary m-2 float-right">글쓰기</router-link>
       <table class="table table-borderless"  frame=void>
         <tr>
           <td>
@@ -18,11 +17,11 @@
             <input
               type="text"
               class="form-control"
-              placeholder="검색어 입력."
+              placeholder="검색어를 입력해 주세요"
               v-model="searchText"
             />
           </td>
-          <td class>
+          <td>
             <button class="btn btn-primary" @click.prevent="searchQnaByOption">검색</button>
             <button class="btn btn-primary" @click.prevent="getQnaList">전체 목록</button>
           </td>
@@ -38,21 +37,11 @@
         </tbody>
       </table>
 
-      <!-- 작성한 글이 있을경우 목록출력 -->
-      <!-- <table v-if="qnaData.list !== 'null'" class="table table-active">
-        <qna-list-item v-for="(qna, index) in qnaData.list" :key="index" :qna="qna">
-        </qna-list-item>
-      </table> -->
-
       <table v-if="qnaData.list !== 'null'" class="table">
         <qna-paginated-list :list-array="qnaData.list" />
       </table>
 
-      <!-- <table align="center">
-        <tr>
-          <td>${navigation.navigator}</td>
-        </tr>
-      </table> -->
+      <router-link to="/qna/create" class="btn btn-warning m-2 float-right">글쓰기</router-link>
     </div>
   </div>
 </template>

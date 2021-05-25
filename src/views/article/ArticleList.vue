@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="col-lg-8 container-fluid table table-bordered table-condensed" align="center">
+    <div class="col-lg-8 container-fluid table-condensed" align="center">
       <br>
       <h2>자유게시판</h2>
-      <router-link to="/article/create" class="btn btn-secondary m-2 float-right">글쓰기</router-link>
       <table class="table table-borderless" frame=void>
         <tr>
           <td> 
@@ -18,7 +17,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="검색어 입력."
+              placeholder="검색어를 입력해 주세요"
               v-model="searchText"
             />
           </td>
@@ -41,6 +40,8 @@
       <table v-if="articleData.list !== 'null'" class="table">
         <article-paginated-list :list-array="articleData.list" />
       </table>
+      
+      <router-link to="/article/create" class="btn btn-warning m-2 float-right">글쓰기</router-link>
     </div>
   </div>
 </template>

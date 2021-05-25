@@ -2,7 +2,7 @@
   <div class="table col-lg-8 container-fluid" align="center">
     <h2>Q&A</h2>
     <br />
-    <div class="mt-3">
+    <!-- <div class="mt-3">
       <b-card-group deck>
         <b-card bg-variant="default" header-tag="header" footer-tag="footer" class="text-center">
           <template #header>
@@ -18,31 +18,35 @@
           </template>
         </b-card>
       </b-card-group>
-    </div>
-    <!-- <table>
+    </div> -->
+    <table>
+      <colgroup>
+        <col style="width: 20%" />
+        <col style="width: 80%" />
+      </colgroup>
       <tr>
-        <th>번호</th>
-        <td>{{ qna.qnano }}</td>
+        <th style="border-right: 1px solid #CCCCCC">번호</th>
+        <td style="text-align: left;">{{ qna.qnano }}</td>
       </tr>
       <tr>
-        <th>제목</th>
-        <td>{{ qna.subject }}</td>
+        <th style="border-right: 1px solid #CCCCCC">등록일</th>
+        <td style="text-align: left;">{{ qna.regtime }}</td>
       </tr>
       <tr>
-        <th>작성일</th>
-        <td>{{ qna.regtime }}</td>
+        <th style="border-right: 1px solid #CCCCCC">작성자</th>
+        <td style="text-align: left;">{{ qna.id }}</td>
       </tr>
       <tr>
-        <td colspan="2">{{ qna.content }}</td>
+        <th style="border-right: 1px solid #CCCCCC">제목</th>
+        <td style="text-align: left;">{{ qna.subject }}</td>
       </tr>
       <tr>
-        <th>답변</th>
-        <td>{{ qna.answer }}</td>
-      </tr> 
-    </table> -->
-    <br />
+        <th style="border-right: 1px solid #CCCCCC">내용</th>
+        <td style="text-align: left; height: 400px">{{ qna.content }}</td>
+      </tr>
+    </table>
+    <br />    
     <button
-      style="float: right"
       class="btn btn-sm btn-danger mr-2"
       @click.prevent="removeQna"
       :name="qna.qnano"
@@ -50,11 +54,17 @@
       삭제
     </button>
     <router-link
-      style="float: right"
       :to="'/qna/modify/' + qna.qnano"
-      class="btn btn-sm btn-warning mr-2"
-      >수정</router-link
-    >
+      class="btn btn-sm btn-warning mr-2">수정
+    </router-link>
+    <br>  
+    <div v-if="qna.answer!=''" class="mt-3">
+      <b-card-group deck>
+        <b-card bg-variant="default" header="답변">
+          <b-card-text style="height: 100px; font-size:20px; float: left;">{{qna.answer}}</b-card-text>
+        </b-card>
+      </b-card-group>
+    </div>
   </div>
 </template>
 
@@ -66,6 +76,7 @@ export default {
   data() {
     return {
       no: "",
+      comment: "",
     };
   },
   computed: {

@@ -103,7 +103,7 @@ table tr:first-of-type {
 }
 table tr td {
   padding: 1rem 0;
-  font-size: 1.1rem;
+  font-size: 20px;
 }
 .btn-cover {
   margin-top: 1.5rem;

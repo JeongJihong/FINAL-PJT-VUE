@@ -11,7 +11,7 @@
         <th>글번호</th>
         <th>제목</th>
         <th>작성자</th>
-        <th>날짜</th>
+        <th>등록일</th>
       </tr>
       <tr v-for="p in paginatedData" :key="p.articleno">
         <td>{{ p.articleno }}</td>
@@ -105,7 +105,7 @@ table tr:first-of-type {
 }
 table tr td {
   padding: 1rem 0;
-  font-size: 1.1rem;
+  font-size: 20px;
 }
 .btn-cover {
   margin-top: 1.5rem;

@@ -3,7 +3,7 @@
     <h2>자유게시판</h2>
     <br />
 
-    <div class="mt-3">
+    <!-- <div class="mt-3">
     <b-card-group deck>
       <b-card bg-variant="default" header-tag="header" class="text-center">
         <template #header>
@@ -15,32 +15,43 @@
         <b-card-text style="height: 400px; font-size:20px; float: left;">{{ article.content }}</b-card-text>
       </b-card>
     </b-card-group>
-  </div>
+  </div> -->
 
-    <!-- <table>
+    <table>
       <colgroup>
-        <col style="width: 10%" />
-        <col style="width: 70%" />
         <col style="width: 20%" />
+        <col style="width: 80%" />
       </colgroup>
       <tr>
-        <td>{{ article.articleno }}</td>
-        <td style="float: left">{{ article.subject }}</td>
-        <td style="float: right">{{ article.regtime }}</td>
+        <th style="border-right: 1px solid #CCCCCC">번호</th>
+        <td style="text-align: left;">{{ article.articleno }}</td>
       </tr>
       <tr>
-        <td colspan="3">{{ article.content }}</td>
+        <th style="border-right: 1px solid #CCCCCC">등록일</th>
+        <td style="text-align: left;">{{ article.regtime }}</td>
       </tr>
-    </table> -->
+      <tr>
+        <th style="border-right: 1px solid #CCCCCC">작성자</th>
+        <td style="text-align: left;">{{ article.userId }}</td>
+      </tr>
+      <tr>
+        <th style="border-right: 1px solid #CCCCCC">제목</th>
+        <td style="text-align: left;">{{ article.subject }}</td>
+      </tr>
+      <tr>
+        <th style="border-right: 1px solid #CCCCCC">내용</th>
+        <td style="text-align: left; height: 400px">{{ article.content }}</td>
+      </tr>
+    </table>
     <br />
-    <button style="float: right"
+    <button
       class="btn btn-sm btn-danger mr-2"
       @click.prevent="removeArticle"
       :name="article.articleno"
     >
       삭제
     </button>
-    <router-link style="float: right" :to="'/article/modify/' + article.articleno" class="btn btn-sm btn-warning mr-2"
+    <router-link :to="'/article/modify/' + article.articleno" class="btn btn-sm btn-warning mr-2"
       >수정</router-link
     >
   </div>
@@ -91,3 +102,8 @@ export default {
   },
 };
 </script>
+<style >
+th {
+  background-color: #d8d0d0;
+}
+</style>
