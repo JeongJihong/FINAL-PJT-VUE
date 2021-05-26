@@ -9,6 +9,9 @@
     img-height="480"
   >
     <b-carousel-slide
+      img-src="https://www.gannett-cdn.com/presto/2019/10/17/USAT/5756be91-0cd0-4c2a-9091-aa1c6f5c0977-Press_HeroPhoto_01.jpg"
+    ></b-carousel-slide>
+    <b-carousel-slide
       img-src="https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg"
     ></b-carousel-slide>
     <b-carousel-slide
