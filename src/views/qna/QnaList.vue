@@ -25,6 +25,7 @@
           <td>
             <button class="btn btn-primary" @click.prevent="searchQnaByOption">검색</button>
             <button class="btn btn-primary" @click.prevent="getQnaList">전체 목록</button>
+            <router-link to="/qna/create" class="btn btn-primary text-white float-right">글쓰기</router-link>
           </td>
         </tr>
       </table>
@@ -39,10 +40,8 @@
       </table>
 
       <table v-if="qnaData.list !== 'null'" class="table">
-        <qna-paginated-list :list-array="qnaData.list" />
+        <qna-paginated-list :list-array="qnaData.list"/>
       </table>
-
-      <router-link to="/qna/create" class="btn btn-warning m-2 float-right">글쓰기</router-link>
       <br>
       <br>
       <br>

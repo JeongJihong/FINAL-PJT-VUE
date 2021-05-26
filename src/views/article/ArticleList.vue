@@ -25,6 +25,7 @@
           <td>
             <button class="btn btn-primary" @click.prevent="searchArticleByOption">검색</button>
             <button class="btn btn-primary" @click.prevent="getArticleList">전체 목록</button>
+            <router-link to="/article/create" class="btn btn-primary text-white" style="float: right;">글쓰기</router-link>
           </td>
         </tr>
       </table>
@@ -41,8 +42,6 @@
       <table v-if="articleData.list !== 'null'" class="table">
         <article-paginated-list :list-array="articleData.list" />
       </table>
-      
-      <router-link to="/article/create" class="btn btn-warning m-2" style="float: right;">글쓰기</router-link>
       <br>
       <br>
       <br>
