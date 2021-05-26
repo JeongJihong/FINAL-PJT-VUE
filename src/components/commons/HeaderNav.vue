@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div>
+    <div class="navbar fixed-top" style="background-color: white;">
       <router-link to="/"><img style="height:75px; width: 200px;" src="@/assets/img/hh.png" /></router-link>
       <b-nav class="nav-nav">
         <b-nav-item active @click.prevent="searchArticle">자유게시판</b-nav-item>
@@ -30,7 +30,10 @@
         </template>
       </b-nav>
     </div>
-
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="container-fluid text-center">
       <router-link to="/"><img src="../../assets/img/happyhouse.png" /></router-link>
     </div>
