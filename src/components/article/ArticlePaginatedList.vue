@@ -38,6 +38,7 @@
 <script>
 export default {
   name: "paginated-list",
+
   data() {
     return {
       option: "articleno",
@@ -45,26 +46,26 @@ export default {
       pageNum: 0,
       perPage: 10,
       currentPage: 1,
-      reverseArray: this.listArray.reverse(),
     };
   },
-  props: {
-    listArray: {
-      type: Array,
-      required: true,
-    },
-  },
+  
   methods: {
     nextPage() {
       this.pageNum += 1;
     },
+
     prevPage() {
       this.pageNum -= 1;
     },
   },
+  
   computed: {
+    articleData() {
+      return this.$store.state.articles.list.reverse();
+    },
+
     pageCount() {
-      let listLeng = this.listArray.length,
+      let listLeng = this.articleData.length,
         listSize = this.perPage,
         page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
@@ -75,13 +76,15 @@ export default {
       */
       return page;
     },
+
     paginatedData() {
       const start = this.pageNum * this.perPage,
         end = start + this.perPage;
-      return this.reverseArray.slice(start, end);
+      return this.articleData.slice(start, end);
     },
+
     rows() {
-        return this.listArray.length
+        return this.articleData.length
       }
   },
 };

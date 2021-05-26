@@ -40,7 +40,7 @@
       </table>
 
       <table v-if="articleData.list !== 'null'" class="table">
-        <article-paginated-list :list-array="articleData.list" />
+        <article-paginated-list/>
       </table>
       <br>
       <br>
@@ -90,7 +90,7 @@ export default {
 
   computed: {
     articleData() {
-      return this.$store.state.articles;
+      return this.$store.state.articles.list;
     },
   },
 
@@ -100,7 +100,7 @@ export default {
     axios
       .get(addr)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.GET_ARTICLE_LIST(response.data);
       })
       .catch((error) => {

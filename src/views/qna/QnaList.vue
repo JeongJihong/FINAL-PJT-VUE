@@ -40,7 +40,7 @@
       </table>
 
       <table v-if="qnaData.list !== 'null'" class="table">
-        <qna-paginated-list :list-array="qnaData.list"/>
+        <qna-paginated-list/>
       </table>
       <br>
       <br>
@@ -100,7 +100,7 @@ export default {
     axios
       .get(addr)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.GET_QNA_LIST(response.data);
       })
       .catch((error) => {

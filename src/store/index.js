@@ -343,7 +343,7 @@ export default new Vuex.Store({
       axios
         .get(addr)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           commit("GET_QNA_LIST", response.data);
         })
         .catch((error) => {
@@ -355,7 +355,7 @@ export default new Vuex.Store({
       axios
         .get(payload)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           commit("GET_QNA", response.data);
         })
         .catch((error) => {
@@ -364,7 +364,7 @@ export default new Vuex.Store({
     },
 
     searchQnaList({ commit }, option) {
-      console.log(option.key + "|" + option.word);
+      // console.log(option.key + "|" + option.word);
       const addr = "http://localhost/qna/search";
 
       axios
@@ -384,7 +384,7 @@ export default new Vuex.Store({
     },
 
     registerQna(context, data) {
-      console.log(data);
+      // console.log(data);
       const addr = "http://localhost/qna/register";
 
       axios
@@ -398,7 +398,7 @@ export default new Vuex.Store({
     },
 
     modifyQna(context, data) {
-      console.log(data);
+      // console.log(data);
       const addr = "http://localhost/qna/";
 
       axios
@@ -412,7 +412,7 @@ export default new Vuex.Store({
     },
 
     deleteQna(context, no) {
-      console.log(no);
+      // console.log(no);
       const addr = "http://localhost/qna/";
 
       axios
@@ -452,7 +452,7 @@ export default new Vuex.Store({
     },
 
     searchArticleList({ commit }, option) {
-      console.log(option.key + "|" + option.word);
+      // console.log(option.key + "|" + option.word);
       const addr = "http://localhost/article/search";
 
       axios
@@ -472,7 +472,7 @@ export default new Vuex.Store({
     },
 
     registerArticle(context, data) {
-      console.log(data);
+      // console.log(data);
       const addr = "http://localhost/article/register";
 
       axios
@@ -486,7 +486,7 @@ export default new Vuex.Store({
     },
 
     modifyArticle(context, data) {
-      console.log(data);
+      // console.log(data);
       const addr = "http://localhost/article/";
 
       axios
@@ -500,7 +500,7 @@ export default new Vuex.Store({
     },
 
     deleteArticle(context, no) {
-      console.log(no);
+      // console.log(no);
       const addr = "http://localhost/article/";
 
       axios

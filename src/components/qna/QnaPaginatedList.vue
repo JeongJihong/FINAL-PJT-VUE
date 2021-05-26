@@ -41,31 +41,33 @@ export default {
       option: 'qnano',
       searchText: '',
       pageNum: 0,
-      reverseArray: this.listArray.reverse(),
     }
   },
   props: {
-    listArray: {
-      type: Array,
-      required: true
-    },
     pageSize: {
       type: Number,
       required: false,
       default: 10
     }
   },
+
   methods: {
     nextPage () {
       this.pageNum += 1;
     },
+
     prevPage () {
       this.pageNum -= 1;
     },
   },
+
   computed: {
+    qnaData() {
+      return this.$store.state.qnas.list.reverse();
+    },
+
     pageCount () {
-      let listLeng = this.listArray.length,
+      let listLeng = this.qnaData.length,
           listSize = this.pageSize,
           page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
@@ -76,10 +78,11 @@ export default {
       */
       return page;
     },
+
     paginatedData () {
       const start = this.pageNum * this.pageSize,
             end = start + this.pageSize;
-      return this.reverseArray.slice(start, end);
+      return this.qnaData.slice(start, end);
     },
   },
 }
