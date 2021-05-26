@@ -59,7 +59,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   name: "ArticleListItem",
   data() {
@@ -81,6 +81,9 @@ export default {
     ...mapActions({
       deleteArticle: "deleteArticle",
     }),
+    ...mapMutations({
+      getArticleList: "GET_ARTICLE_LIST",
+    }),
 
     // removeArticle() {
     //   console.log(this.article);
@@ -98,10 +101,11 @@ export default {
         if (confirm("정말로 삭제하시겠습니까?")) {
         axios.delete(`http://localhost/article/${this.no}`).then(({ data }) => {
           let msg = "삭제 처리시 문제가 발생했습니다.";
-          if (data === "success") {
+          if (data.msg === "success") {
             msg = "삭제가 완료되었습니다.";
           }
           alert(msg);
+          this.getArticleList(data);
           this.$router.push("/article");
         });
       }

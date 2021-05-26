@@ -383,7 +383,7 @@ export default new Vuex.Store({
         });
     },
 
-    registerQna(context, data) {
+    registerQna({ commit }, data) {
       // console.log(data);
       const addr = "http://localhost/qna/register";
 
@@ -391,13 +391,14 @@ export default new Vuex.Store({
         .post(addr, data)
         .then((response) => {
           console.log(response);
+          commit("GET_QNA_LIST", response.data);
         })
         .catch((error) => {
           console.dir(error);
         });
     },
 
-    modifyQna(context, data) {
+    modifyQna({ commit }, data) {
       // console.log(data);
       const addr = "http://localhost/qna/";
 
@@ -405,13 +406,14 @@ export default new Vuex.Store({
         .put(addr + data.qnano, data)
         .then((response) => {
           console.log(response);
+          commit("GET_QNA_LIST", response.data);
         })
         .catch((error) => {
           console.dir(error);
         });
     },
 
-    deleteQna(context, no) {
+    deleteQna({ commit }, no) {
       // console.log(no);
       const addr = "http://localhost/qna/";
 
@@ -419,6 +421,7 @@ export default new Vuex.Store({
         .delete(addr + no)
         .then((response) => {
           console.log(response);
+          commit("GET_QNA_LIST", response.data);
         })
         .catch((error) => {
           console.dir(error);
@@ -471,7 +474,7 @@ export default new Vuex.Store({
         });
     },
 
-    registerArticle(context, data) {
+    registerArticle({ commit }, data) {
       // console.log(data);
       const addr = "http://localhost/article/register";
 
@@ -479,13 +482,14 @@ export default new Vuex.Store({
         .post(addr, data)
         .then((response) => {
           console.log(response);
+          commit("GET_ARTICLE_LIST", response.data);
         })
         .catch((error) => {
           console.dir(error);
         });
     },
 
-    modifyArticle(context, data) {
+    modifyArticle({ commit }, data) {
       // console.log(data);
       const addr = "http://localhost/article/";
 
@@ -493,13 +497,14 @@ export default new Vuex.Store({
         .put(addr + data.articleno, data)
         .then((response) => {
           console.log(response);
+          commit("GET_ARTICLE_LIST", response.data);
         })
         .catch((error) => {
           console.dir(error);
         });
     },
 
-    deleteArticle(context, no) {
+    deleteArticle({ commit }, no) {
       // console.log(no);
       const addr = "http://localhost/article/";
 
@@ -507,6 +512,7 @@ export default new Vuex.Store({
         .delete(addr + no)
         .then((response) => {
           console.log(response);
+          commit("GET_ARTICLE_LIST", response.data);
         })
         .catch((error) => {
           console.dir(error);

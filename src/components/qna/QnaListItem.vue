@@ -70,7 +70,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   name: "QnaListItem",
   data() {
@@ -92,6 +92,10 @@ export default {
       deleteQna: "deleteQna",
     }),
 
+    ...mapMutations({
+      getQnaList: "GET_QNA_LIST",
+    }),
+
     removeQna() {
       if(this.qna.id != this.loginId) {
         alert("본인만 삭제 가능합니다!");
@@ -102,10 +106,11 @@ export default {
         if (confirm("정말로 삭제하시겠습니까?")) {
         axios.delete(`http://localhost/qna/${this.no}`).then(({ data }) => {
           let msg = "삭제 처리시 문제가 발생했습니다.";
-          if (data === "success") {
+          if (data.msg === "success") {
             msg = "삭제가 완료되었습니다.";
           }
           alert(msg);
+          this.getQnaList(data);
           this.$router.push("/qna");
         });
       }
