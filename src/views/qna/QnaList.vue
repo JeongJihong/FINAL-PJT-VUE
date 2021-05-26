@@ -43,6 +43,9 @@
       </table>
 
       <router-link to="/qna/create" class="btn btn-warning m-2 float-right">글쓰기</router-link>
+      <br>
+      <br>
+      <br>
     </div>
   </div>
 </template>
