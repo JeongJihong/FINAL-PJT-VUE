@@ -42,7 +42,10 @@
         <article-paginated-list :list-array="articleData.list" />
       </table>
       
-      <router-link to="/article/create" class="btn btn-warning m-2 float-right">글쓰기</router-link>
+      <router-link to="/article/create" class="btn btn-warning m-2" style="float: right;">글쓰기</router-link>
+      <br>
+      <br>
+      <br>
     </div>
   </div>
 </template>

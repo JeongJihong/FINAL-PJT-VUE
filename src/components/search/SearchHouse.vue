@@ -22,6 +22,10 @@
             <div class="card-body">
               <blockquote class="blockquote mb-0">
                 <h6>동 : {{ deal.법정동 }}</h6>
+                <h6>지번 : {{ deal.지번 }}</h6>
+                <h6>층 : {{ deal.층 }}</h6>
+                <h6>대지권면적 : {{ deal.대지권면적 }}</h6>
+                <h6>전용면적 : {{ deal.전용면적 }}</h6>
                 <h6>가격 : {{ deal.거래금액 }}</h6>
                 <h6>날짜 : {{ deal.년 }}.{{ deal.월 }}.{{ deal.일 }}</h6>
               </blockquote>
