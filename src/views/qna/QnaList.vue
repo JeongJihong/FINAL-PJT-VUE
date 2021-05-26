@@ -78,13 +78,13 @@ export default {
     searchQnaByOption() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.searchQnaList({ key: this.option, word: this.searchText });
-      this.$router.go();
+      // this.$router.go();
     },
 
     searchQna() {
       // console.log(this.selectGugun + "|" + this.selectDong);
       this.getQnaList();
-      this.$router.go(this.$router.currentRoute);
+      // this.$router.go(this.$router.currentRoute);
     },
   },
 

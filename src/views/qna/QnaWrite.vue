@@ -24,6 +24,9 @@
       <button v-if="type == 'create'" style="float: right" class="btn btn-primary" @click.prevent="writeQna">질문작성</button>
       <button v-else class="btn btn-primary" style="float: right" @click.prevent="updateQna">수정</button>
     </div>
+    <br>
+    <br>
+    <br>
   </div>
 </template>
 
