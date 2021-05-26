@@ -7,7 +7,7 @@
         <b-carousel
           id="carousel"
           v-model="slide"
-          :interval="8000"
+          :interval="5000"
           controls
           indicators
           background="#AAAAAA"
@@ -15,6 +15,16 @@
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >
+          <b-carousel-slide img-blank img-alt="Blank image">
+            <h4 class="font-weight-bold text-center my-4">항목 별 데이터 비교</h4>
+            <img
+              class="d-block img-fluid w-100"
+              width="350"
+              height="350"
+              src="@/assets/img/magnifying-icon-file.png"
+              alt="image slot"
+            >
+          </b-carousel-slide>
           <template v-for="(item, index) in barDataCollection">
             <b-carousel-slide img-blank img-alt="Blank image" :key=index>
               <h4 class="font-weight-bold text-center my-4">{{ item.labels[0] }}</h4>
