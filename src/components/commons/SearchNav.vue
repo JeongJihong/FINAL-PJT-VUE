@@ -1,7 +1,7 @@
 <template>
     <section class="mb-3">
 		<div class="text-center">
-			<div class="dropdown bg-dark p-1">
+			<div class="dropdown p-1" style="background-color: #1c2331;">
 				<div class="btn-group">
 					<div class="text-white mr-2">도시 <select class="btn btn-light p-1" v-model="selectSido">
 						<option value="0" class="text-dark">선택</option>

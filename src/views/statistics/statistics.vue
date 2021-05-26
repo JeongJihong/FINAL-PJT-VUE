@@ -15,14 +15,17 @@
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >
-          <b-carousel-slide img-blank img-alt="Blank image" v-for="(item, index) in barDataCollection" :key=index>
-            <h4 class="font-weight-bold text-center my-4">{{ item.labels[0] }}</h4>
-            <statistics-shop-bar class="m-auto bar" :chart-data="item"></statistics-shop-bar>
-          </b-carousel-slide>
+          <template v-for="(item, index) in barDataCollection">
+            <b-carousel-slide img-blank img-alt="Blank image" :key=index>
+              <h4 class="font-weight-bold text-center my-4">{{ item.labels[0] }}</h4>
+              <statistics-shop-bar class="m-auto bar" :chart-data="item"></statistics-shop-bar>
+            </b-carousel-slide>
+          </template>
         </b-carousel>
       </div>
     </b-row>
-    <div v-for="(item, index) in interest" :key="index">{{ item.dong }}</div>
+    <div class="m-5"></div>
+    <div class="d-none">{{ interest }}</div>
   </div>
 </template>
 
@@ -49,7 +52,7 @@ export default {
   },
 
   mounted () {
-    this.fillData()
+    this.fillData();
   },
 
   methods: {
@@ -76,7 +79,6 @@ export default {
               label: interest[j],
               backgroundColor: '',
               data: [0],
-              min: 0,
             });
         }
       }
@@ -111,6 +113,7 @@ export default {
                 }
               }
               if(!flag) {
+                this.barDataCollection[i].datasets[index].data = [0];
                 tmp.push(0);
               }
             }

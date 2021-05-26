@@ -25,7 +25,7 @@
           >
             <b-dropdown-item style="font-size: 20px"><a href="#logout" @click="logout">로그아웃</a></b-dropdown-item>
             <b-dropdown-item style="font-size: 20px"><router-link to="/mem/mvinsertmember">회원정보</router-link></b-dropdown-item>
-            <b-dropdown-item style="font-size: 20px"><router-link to="/mem/delete">회원탈퇴</router-link></b-dropdown-item>
+            <!-- <b-dropdown-item style="font-size: 20px"><router-link to="/mem/delete">회원탈퇴</router-link></b-dropdown-item> -->
           </b-nav-item-dropdown>
           <!-- <b-nav-item active><a href="#logout" @click="logout">로그아웃</a></b-nav-item>
           <b-nav-text>|</b-nav-text>
